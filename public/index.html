@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>杭州2店开业协同计划</title>
+<style>
+:root {
+  --bg: #FAF7F2;
+  --card-bg: #FFFFFF;
+  --green: #2D6A4F;
+  --green-light: #40916C;
+  --green-bg: #D8F3DC;
+  --warm-yellow: #C49A3C;
+  --text: #1a1a1a;
+  --text-secondary: #555;
+  --text-muted: #999;
+  --border: #e8e4da;
+  --shadow: 0 2px 8px rgba(0,0,0,0.06);
+  --radius: 12px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.6;
+  min-height: 100vh;
+}
+.app-container { max-width: 1200px; margin: 0 auto; padding: 24px 20px; }
+
+.main-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 16px; }
+.header-left { display: flex; align-items: baseline; gap: 12px; }
+.logo { font-size: 26px; font-weight: 800; color: var(--green); letter-spacing: -0.5px; }
+.subtitle { font-size: 13px; color: var(--text-muted); }
+.header-right { display: flex; align-items: center; gap: 10px; }
+
+.tab-bar { display: flex; gap: 6px; margin-bottom: 24px; background: var(--card-bg); padding: 4px; border-radius: var(--radius); box-shadow: var(--shadow); align-items: center; }
+.tab-btn { padding: 10px 24px; border: none; border-radius: 10px; background: transparent; cursor: pointer; font-size: 14px; font-weight: 500; color: var(--text-secondary); transition: all 0.2s; white-space: nowrap; }
+.tab-btn:hover { background: #f5f3ee; color: var(--text); }
+.tab-bar { position: relative; }
+.tab-btn.draggable { cursor: grab; }
+.tab-btn.draggable:active { cursor: grabbing; }
+.tab-btn.drag-over { outline: 2px dashed var(--green); outline-offset: -2px; }
+.tab-btn.dragging { opacity: 0.4; }
+.tab-bar .tab-drag-hint {
+  font-size: 11px; color: var(--text-muted); margin-left: auto;
+  display: flex; align-items: center; gap: 4px; opacity: 0;
+  transition: opacity 0.3s;
+}
+.tab-bar:hover .tab-drag-hint { opacity: 0.5; }
+
+.tab-btn.active { background: var(--green); color: #fff; box-shadow: 0 2px 6px rgba(45,106,79,0.3); }
+
+.stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 24px; }
+.stat-card { background: var(--card-bg); border-radius: var(--radius); padding: 18px 16px; box-shadow: var(--shadow); text-align: center; transition: transform 0.2s; }
+.stat-card:hover { transform: translateY(-2px); }
+.stat-value { font-size: 26px; font-weight: 800; color: var(--green); }
+.progress-card .stat-value { color: var(--warm-yellow); }
+.stat-label { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+.filter-bar { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
+.filter-bar select { padding: 8px 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 13px; background: var(--card-bg); color: var(--text); cursor: pointer; outline: none; }
+.filter-bar select:focus { border-color: var(--green); }
+.btn-filter-clear { padding: 8px 16px; border: 1px solid var(--border); border-radius: 8px; background: var(--card-bg); cursor: pointer; font-size: 13px; color: var(--text-muted); transition: all 0.2s; }
+.btn-filter-clear:hover { border-color: var(--green); color: var(--green); }
+
+.tab-content { display: none; animation: fadeIn 0.3s ease; }
+.tab-content.active { display: block; }
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .app-container { padding: 12px 10px; }
+  .logo { font-size: 20px; }
+  .subtitle { font-size: 11px; display: none; }
+  .main-header { margin-bottom: 14px; gap: 8px; }
+  
+  .tab-bar { overflow-x: auto; flex-wrap: nowrap; gap: 4px; padding: 4px; }
+  .tab-btn { padding: 8px 14px; font-size: 12px; white-space: nowrap; flex-shrink: 0; }
+  .tab-bar .tab-drag-hint { display: none; }
+  
+  .stats-row { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .stat-card { padding: 12px 8px; }
+  .stat-value { font-size: 20px; }
+  .stat-label { font-size: 10px; }
+  
+  .filter-bar { flex-direction: column; gap: 6px; }
+  .filter-bar select { width: 100%; }
+  .btn-filter-clear { width: 100%; text-align: center; }
+  
+  .task-card { padding: 12px; gap: 8px; flex-wrap: wrap; }
+  .task-card-left input[type=checkbox] { width: 22px; height: 22px; }
+  .task-card-main { flex: 1 1 100%; }
+  .task-title { font-size: 13px; }
+  .task-action { font-size: 11px; }
+  .task-meta { gap: 4px; }
+  .badge { font-size: 10px; padding: 2px 6px; }
+  .task-card-right { width: 100%; margin-top: 4px; }
+  .task-status { display: inline-block; }
+  
+  .overview-card { padding: 16px; }
+  .overview-card h3 { font-size: 15px; }
+  
+  .people-grid { gap: 6px; }
+  .people-chip { padding: 6px 10px; font-size: 11px; }
+  
+  .group-summary { gap: 8px; }
+  .group-summary-icon { width: 40px; height: 40px; font-size: 12px; }
+  .group-summary-name { font-size: 12px; }
+  .group-summary-cost { font-size: 12px; }
+  
+  .timeline { padding-left: 16px; }
+  .timeline-dot { left: -23px; width: 10px; height: 10px; }
+  
+  .optional-summary { flex-direction: column; gap: 10px; padding: 12px; }
+  .optional-grid { grid-template-columns: 1fr; }
+  
+  .info-grid { grid-template-columns: 1fr; }
+  .info-card { padding: 16px; }
+  
+  .optional-card { padding: 14px; }
+  .card-title { font-size: 13px; }
+  
+  .group-header { flex-wrap: wrap; gap: 6px; }
+  .group-title { font-size: 14px; }
+}
+
+@media (max-width: 480px) {
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+  .stat-value { font-size: 18px; }
+  .logo { font-size: 18px; }
+  #saveBtn { padding: 5px 10px; font-size: 11px; }
+}
+
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes slideInUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes slideOutDown { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(16px); } }
+@keyframes bellShake { 0%, 50%, 100% { transform: rotate(0); } 10%, 30% { transform: rotate(-15deg); } 20%, 40% { transform: rotate(15deg); } }
+.toast-container { position: fixed; bottom: 24px; right: 24px; z-index: 9999; display: flex; flex-direction: column; gap: 8px; }
+.toast { background: #2d6a4f; color: #fff; padding: 12px 20px; border-radius: 10px; box-shadow: 0 6px 20px rgba(0,0,0,0.18); font-size: 13px; max-width: 340px; animation: slideInUp 0.35s ease; line-height: 1.5; }
+.toast .toast-who { font-weight: 700; font-size: 14px; }
+.toast .toast-detail { font-size: 12px; opacity: 0.85; margin-top: 2px; }
+.toast.removing { animation: slideOutDown 0.3s ease forwards; }
+
+/* Notification Bell */
+.notif-bell { position: relative; background: none; border: none; cursor: pointer; padding: 6px 10px; font-size: 18px; color: var(--text); }
+.notif-bell.ringing { animation: bellShake 0.6s ease; }
+.notif-badge { position: absolute; top: 0; right: 0; min-width: 18px; height: 18px; background: #e74c3c; color: #fff; border-radius: 9px; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; padding: 0 5px; }
+.notif-dropdown { position: absolute; top: 100%; right: 0; width: 340px; max-height: 480px; background: var(--card-bg); border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.18); margin-top: 8px; overflow: hidden; display: none; z-index: 1000; }
+.notif-dropdown.open { display: block; animation: slideInUp 0.25s ease; }
+.notif-header { padding: 14px 16px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; background: #f8f6f0; }
+.notif-header-title { font-weight: 700; font-size: 14px; color: var(--green); }
+.notif-clear { font-size: 11px; color: var(--text-muted); background: none; border: none; cursor: pointer; }
+.notif-clear:hover { color: #e74c3c; }
+.notif-empty { padding: 40px 20px; text-align: center; color: var(--text-muted); font-size: 13px; }
+.notif-item { padding: 12px 16px; border-bottom: 1px solid var(--border); cursor: pointer; font-size: 13px; transition: background 0.15s; }
+.notif-item:hover { background: #f8f6f0; }
+.notif-item:last-child { border-bottom: none; }
+.notif-item.unread { background: #f0f8f3; }
+.notif-who { font-weight: 700; color: var(--green); margin-right: 6px; }
+.notif-action { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+.notif-detail { color: var(--text-secondary); margin: 4px 0; }
+.notif-tasks { font-size: 11px; color: var(--text-muted); padding-left: 8px; margin-top: 4px; }
+.notif-tasks .task-done { color: var(--green); }
+.notif-tasks .task-pending { color: var(--text-muted); }
+.notif-time { font-size: 10px; color: var(--text-muted); margin-top: 4px; }
+
+.task-group { margin-bottom: 28px; }
+.group-header { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 2px solid var(--border); margin-bottom: 12px; }
+.group-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 10px; }
+.group-title { font-size: 16px; font-weight: 700; display: flex; align-items: center; }
+.group-stats { font-size: 12px; color: var(--text-muted); background: #f5f3ee; padding: 4px 10px; border-radius: 10px; }
+
+.task-card { display: flex; align-items: flex-start; background: var(--card-bg); border-radius: 10px; padding: 16px 18px; margin-bottom: 10px; box-shadow: var(--shadow); gap: 14px; border-left: 3px solid transparent; transition: all 0.2s; }
+.task-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+.task-card.completed { border-left-color: var(--green); opacity: 0.7; background: #f8faf8; }
+.task-card.completed .task-title { text-decoration: line-through; color: var(--text-muted); }
+.task-card.completed .task-action { text-decoration: line-through; color: var(--text-muted); }
+.task-card.completed .badge { opacity: 0.5; }
+.task-card-left { padding-top: 2px; }
+.task-card-left input[type=checkbox] { width: 20px; height: 20px; accent-color: var(--green); cursor: pointer; }
+.task-card-main { flex: 1; min-width: 0; }
+.task-title-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap; }
+.task-title { font-size: 15px; font-weight: 600; color: var(--text); }
+.task-platform { font-size: 11px; color: var(--text-muted); background: #f5f3ee; padding: 2px 8px; border-radius: 4px; white-space: nowrap; font-weight: 500; }
+.task-action { font-size: 13px; color: var(--text-secondary); margin-top: 6px; line-height: 1.5; }
+.task-meta { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; align-items: center; }
+.badge { font-size: 11px; padding: 3px 10px; border-radius: 12px; font-weight: 500; white-space: nowrap; }
+.badge-owner { background: var(--green-bg); color: var(--green); }
+.badge-collab { background: #f0ebe3; color: #5A4E3C; }
+.task-card-right { flex-shrink: 0; }
+.task-status { font-size: 11px; padding: 5px 12px; border-radius: 12px; font-weight: 600; background: #f5f3ee; color: var(--text-muted); white-space: nowrap; }
+.task-status.done { background: var(--green-bg); color: var(--green); }
+.task-card.completed .task-status.done { background: #d4edda; color: #155724; }
+
+.sub-items { margin-top: 10px; padding: 8px 0 0 12px; border-left: 2px solid var(--border); }
+.sub-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-secondary); padding: 3px 0; }
+.sub-item.done { text-decoration: line-through; opacity: 0.55; }
+.sub-item input[type=checkbox] { width: 15px; height: 15px; accent-color: var(--green); cursor: pointer; }
+.sub-progress { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+.sub-progress-bar { flex: 1; height: 5px; background: #e8e4da; border-radius: 3px; overflow: hidden; }
+.sub-progress-fill { height: 100%; background: var(--green); border-radius: 3px; transition: width 0.3s; }
+.sub-progress span { font-size: 11px; color: var(--text-muted); white-space: nowrap; }
+
+.overview-card { background: var(--card-bg); border-radius: var(--radius); padding: 24px; margin-bottom: 18px; box-shadow: var(--shadow); }
+.overview-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 16px; color: var(--green); }
+.overview-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+
+.progress-big { height: 14px; background: #e8e4da; border-radius: 8px; overflow: hidden; margin-bottom: 12px; }
+.progress-big-fill { height: 100%; background: linear-gradient(90deg, var(--green), var(--green-light)); border-radius: 8px; transition: width 0.6s ease; }
+
+.people-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+.people-chip { background: #f8f6f0; border: 1px solid var(--border); border-radius: 10px; padding: 10px 16px; font-size: 13px; display: flex; align-items: center; gap: 8px; transition: all 0.2s; }
+.people-chip:hover { border-color: var(--green); background: #f0f8f3; }
+
+.group-summary { display: flex; align-items: center; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+.group-summary:last-child { border-bottom: none; }
+.group-summary-icon { width: 52px; height: 52px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; flex-shrink: 0; }
+.group-summary-body { flex: 1; min-width: 0; }
+.group-summary-name { font-size: 14px; font-weight: 600; }
+.group-summary-meta { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+.group-summary-bar { height: 6px; background: #e8e4da; border-radius: 3px; overflow: hidden; margin-top: 6px; }
+.group-summary-bar-fill { height: 100%; border-radius: 3px; transition: width 0.5s; }
+.group-summary-cost { font-size: 14px; font-weight: 700; white-space: nowrap; color: var(--text); }
+
+.timeline { position: relative; padding-left: 24px; border-left: 2px solid var(--border); }
+.timeline-item { margin-bottom: 18px; position: relative; }
+.timeline-item:last-child { margin-bottom: 0; }
+.timeline-dot { position: absolute; left: -31px; top: 3px; width: 14px; height: 14px; border-radius: 50%; background: var(--border); border: 3px solid var(--bg); box-shadow: 0 0 0 2px var(--border); }
+.timeline-item:first-child .timeline-dot { background: var(--green); box-shadow: 0 0 0 2px var(--green); }
+.timeline-date { font-size: 12px; font-weight: 700; color: var(--green); margin-bottom: 2px; }
+.timeline-text { font-size: 13px; color: var(--text-secondary); }
+
+.optional-summary { display: flex; gap: 32px; margin-bottom: 20px; padding: 16px 20px; background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow); flex-wrap: wrap; }
+.optional-summary-item { display: flex; align-items: center; gap: 8px; }
+.optional-summary-label { font-size: 13px; color: var(--text-secondary); white-space: nowrap; }
+.optional-summary-value { font-size: 20px; font-weight: 800; color: var(--warm-yellow); }
+
+.optional-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+.optional-card { background: var(--card-bg); border-radius: var(--radius); padding: 20px; border: 2px solid var(--border); box-shadow: var(--shadow); transition: all 0.2s; cursor: pointer; position: relative; }
+.optional-card:hover { border-color: var(--green); }
+.optional-card.selected { border-color: var(--green); background: #f0f8f3; }
+.optional-card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+.card-type { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+.card-title { font-size: 15px; font-weight: 700; margin: 6px 0 4px; color: var(--text); }
+.card-platform { font-size: 11px; color: var(--text-muted); background: #f5f3ee; padding: 2px 8px; border-radius: 4px; }
+.opt-toggle { flex-shrink: 0; border: 2px solid var(--border); border-radius: 20px; padding: 7px 18px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; background: var(--card-bg); color: var(--text-muted); }
+.opt-toggle:hover { border-color: var(--green); color: var(--green); }
+.opt-toggle.on { background: var(--green); border-color: var(--green); color: #fff; }
+.opt-toggle.on:hover { background: var(--green-light); }
+.card-cost-range { font-size: 14px; font-weight: 700; color: var(--green); margin: 10px 0; }
+.card-content { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+.card-effect { font-size: 12px; color: var(--text-muted); margin-top: 6px; }
+.card-owner { font-size: 12px; color: var(--text-muted); margin-top: 6px; }
+.card-editable { display: flex; gap: 8px; margin-top: 12px; }
+.card-editable input { padding: 6px 10px; border: 1px solid var(--border); border-radius: 6px; font-size: 12px; flex: 1; outline: none; }
+.card-editable input:focus { border-color: var(--green); }
+
+.info-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 18px; }
+.info-card { background: var(--card-bg); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+.info-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 12px; color: var(--green); padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+.info-card p, .info-card li { font-size: 13px; color: var(--text-secondary); margin: 6px 0; line-height: 1.7; }
+.info-card ul { padding-left: 20px; }
+.info-card ul li { list-style: disc; }
+.info-highlight { font-size: 24px; font-weight: 800; color: var(--green); }
+
+.empty-state { text-align: center; padding: 60px 20px; color: var(--text-muted); }
+.empty-state .icon { font-size: 48px; margin-bottom: 12px; }
+
+
+.overview-card { position: relative; }
+.overview-card.draggable { cursor: grab; }
+.overview-card.draggable:active { cursor: grabbing; }
+.overview-card.drag-over { border: 2px dashed var(--green); }
+.overview-card .drag-handle {
+  position: absolute; top: 10px; right: 10px;
+  width: 24px; height: 24px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: grab; color: var(--text-muted); font-size: 14px;
+  opacity: 0; transition: opacity 0.2s;
+  border-radius: 4px;
+}
+.overview-card:hover .drag-handle { opacity: 0.6; }
+.overview-card .drag-handle:hover { opacity: 1; background: #f0f0f0; }
+.overview-card.dragging { opacity: 0.5; transform: rotate(1deg); }
+
+.sync-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+</style>
+</head>
+<body>
+
+<div class="app-container">
+  <header class="main-header">
+    <div class="header-left">
+      <h1 class="logo">杭州2店开业协同计划</h1>
+      <span class="subtitle">项目分工 · 整体方案 · 基础信息</span>
+    </div>
+    <div class="header-right">
+      <span id="syncDot" class="sync-dot"></span>
+      <span id="syncText" style="font-size:12px;color:var(--text-muted)">本地模式</span>
+      <div style="position:relative; display:inline-block; margin-left:12px">
+        <button id="notifBtn" class="notif-bell" title="活动通知">🔔<span id="notifBadge" class="notif-badge" style="display:none">0</span></button>
+        <div id="notifDropdown" class="notif-dropdown">
+          <div class="notif-header"><span class="notif-header-title">📋 活动动态</span><button class="notif-clear" onclick="clearAllNotifications()">清空</button></div>
+          <div id="notifList"></div>
+        </div>
+      </div>
+      <button id="saveBtn" onclick="saveState();syncAllToServer();showSaved()" style="margin-left:8px;padding:6px 16px;background:var(--green);color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.2s">保存</button><span id="savedHint" style="margin-left:6px;font-size:11px;color:var(--green);opacity:0;transition:opacity 0.3s">已保存 ✓</span><input type="text" id="userName" placeholder="输入你的名字" maxlength="20" style="margin-left:12px;padding:4px 10px;border:1px solid var(--border);border-radius:6px;font-size:13px;width:120px">
+    </div>
+  </header>
+  <div class="tab-bar">
+    <button class="tab-btn active" data-tab="overview">整体方案</button>
+    <button class="tab-btn" data-tab="tasks">项目分工</button>
+    <button class="tab-btn" data-tab="optional">可选宣传项目</button>
+    <button class="tab-btn" data-tab="info">基础信息</button>
+  <div class="tab-drag-hint">↕ 可拖拽排序</div></div>
+  <div class="stats-row">
+    <div class="stat-card"><div class="stat-value" id="statTotal">34</div><div class="stat-label">总任务数</div></div>
+    <div class="stat-card"><div class="stat-value" id="statDone">0</div><div class="stat-label">已完成</div></div>
+    <div class="stat-card"><div class="stat-value" id="statPending">34</div><div class="stat-label">待完成</div></div>
+    <div class="stat-card progress-card"><div class="stat-value" id="statPercent">0%</div><div class="stat-label">整体完成度</div></div>
+    <div class="stat-card"><div class="stat-value" id="statBaseCost">53,690</div><div class="stat-label">基础已知费用</div></div>
+    <div class="stat-card"><div class="stat-value" id="statOptDone">0</div><div class="stat-label">新增已完成项目</div></div>
+    <div class="stat-card"><div class="stat-value" id="statOptCost">¥0 — ¥0</div><div class="stat-label">新增预算范围</div></div>
+  </div>
+  <div class="tab-content active" id="tab-overview"><div id="overviewContent"></div></div>
+  <div class="tab-content" id="tab-tasks">
+    <div class="filter-bar">
+      <select id="filterStatus"><option value="all">全部状态</option><option value="incomplete">待完成</option><option value="completed">已完成</option></select>
+      <select id="filterOwner"><option value="all">全部人员</option></select>
+      <select id="filterGroup"><option value="all">全部工作组</option></select>
+      <select id="filterPlatform"><option value="all">全部平台</option></select>
+      <button id="filterClear" class="btn-filter-clear">清除筛选</button>
+    </div>
+    <div id="taskContainer"></div>
+  </div>
+  <div class="tab-content" id="tab-optional">
+    <div class="optional-summary">
+      <div class="optional-summary-item"><span class="optional-summary-label">已选项目：</span><span class="optional-summary-value" id="optSelectedCount">0/15</span></div>
+      <div class="optional-summary-item"><span class="optional-summary-label">新增预算费用：</span><span class="optional-summary-value" id="optMinTotal">¥0</span><span style="font-size:12px;color:var(--text-muted);font-weight:400"> — </span><span class="optional-summary-value" id="optMaxTotal">¥0</span></div>
+    </div>
+    <div class="optional-grid" id="optionalGrid"><div class="empty-state">加载中...</div></div>
+  </div>
+  <div class="tab-content" id="tab-info">
+    <div class="info-grid">
+      <div class="info-card"><h3>开业活动方案</h3><div style="background:#fdf6e8;border:1px dashed var(--warm-yellow);border-radius:8px;padding:12px;text-align:center;margin-bottom:10px"><span style="font-size:13px;color:var(--warm-yellow);font-weight:600">待定</span><p style="font-size:11px;color:var(--text-muted);margin-top:4px">开业主题、活动优惠、活动形式等内容尚未确定</p></div><p>基础开业活动：¥5,000（门店氛围布置、接待台搭建、茶歇/小礼品）</p><p>开业拍摄：¥1,000（文菁负责，七七协同）</p><p>可选花艺装扮：¥3,000（桌花、花篮及门店氛围布置）</p><p style="margin-top:8px;font-size:12px;color:var(--text-muted)">负责人：AC总 | 协同：陈总、余兰 | 截止：8月10日</p></div>
+      <div class="info-card"><h3>开业优惠及预约政策</h3><p>活动政策：待确认</p><p>预约方式：通过小红书店号、抖音来客、点评私信、微信公众号及企微进行预约</p></div>
+      <div class="info-card"><h3>基础宣传渠道</h3><ul><li>小红书达人矩阵（约50位素人博主）</li><li>小红书店号 + 总号内容</li><li>抖音店号 + 总号视频</li><li>抖音来客团购</li><li>视频号店号内容</li><li>大众点评/美团店铺</li><li>微信公众号推文</li><li>线下物料（指引牌、水牌、海报）</li></ul></div>
+      <div class="info-card"><h3>基础方案工作范围</h3><p>基础方案覆盖<strong>7个工作组、34项执行任务</strong>，涵盖项目统筹、小红书运营、抖音及视频号、点评与地图、线下活动及私域、物料制作、复盘等全流程。</p></div>
+      <div class="info-card"><h3>基础预算说明</h3><p>基础已知费用合计：<span class="info-highlight">53,690元</span></p><ul><li>小红书达人矩阵：15,000元</li><li>小红书聚光投放：15,000元</li><li>点评/美团付费推广：12,000元</li><li>基础开业活动：5,000元</li><li>抖音本地推：3,500元</li><li>基础伴手礼：1,500元</li><li>开业拍摄：1,000元</li><li>小红书店号认证：600元</li><li>线下物料：90元</li></ul></div>
+    </div>
+  </div>
+</div>
+<div class="toast-container" id="toastContainer"></div>
+<script>
+const EMBEDDED = {"last_updated_by":"","last_updated_at":"","last_save_version":0,"tasks":[{"id":1,"group_name":"项目统筹","platform":"全项目","title":"整体方案输出","action":"确认杭州2店开业基础方案、可选宣传项目及时间表","due_date":"9月4日","owner":"AC总","collaborators":"陈总、余兰、宇杰、七七、丽莎、鑫璇、微微、区域经理、林可欣","estimated_cost":0,"actual_cost":null,"status":"pending","completed":0,"acceptance":"方案定稿","note":"","updated_by":"","updated_at":"","sub_items":null,"planned_date":"2026-08-21","completed_at":""},{"id":2,"group_name":"项目统筹","platform":"全项目","title":"预算申请","action":"提交基础预算；待询价项目单独补充审批","due_date":"9月4日","owner":"AC总、陈总","collaborators":"余兰","estimated_cost":0,"actual_cost":null,"status":"pending","completed":0,"acceptance":"预算审批完成","note":"","updated_by":"","updated_at":"","sub_items":null,"planned_date":"2026-08-21","completed_at":""},{"id":3,"group_name":"项目统筹","platform":"全平台","title":"宣传图文定稿","action":"统一门店名称、地址、电话、活动和预约口径","due_date":"8月25日","owner":"丽莎、林可欣","collaborators":"余兰、七七","estimated_cost":0,"actual_cost":null,"status":"pending","completed":0,"acceptance":"全平台信息一致","note":"","updated_by":"","updated_at":"","sub_items":"[{\"id\":1,\"title\":\"预热城市海报-丽莎\",\"completed\":0},{\"id\":2,\"title\":\"预热环境海报-丽莎\",\"completed\":0},{\"id\":3,\"title\":\"公众号推文-丽莎\",\"completed\":0},{\"id\":4,\"title\":\"开业活动海报-林可欣\",\"completed\":0},{\"id\":5,\"title\":\"KOC打卡活动海报-林可欣\",\"completed\":0}]","planned_date":"2026-08-26","completed_at":""},{"id":4,"group_name":"项目统筹","platform":"全项目","title":"活动落地执行","action":"跟进平台、内容、物料和开业现场","due_date":"9月4日—9月19日","owner":"余兰、七七、林可欣","collaborators":"AC总、陈总、宇杰、区域经理","estimated_cost":0,"actual_cost":null,"status":"pending","completed":0,"acceptance":"按节点完成","note":"","updated_by":"","updated_at":"","sub_items":null,"planned_date":"2026-09-06","completed_at":""},{"id":5,"group_name":"小红书运营组","platform":"小红书达人","title":"基础达人矩阵","action":"约50位素人博主，内容包含杭州2店新店、服务和开业活动","due_date":"9月2日—9月17日","owner":"灵榕","collaborators":"余兰、七七","estimated_cost":15000,"actual_cost":null,"status":"pending","completed":0,"acceptance":"内容上线并回收数据","note":"","updated_by":"","updated_at":"","sub_items":null,"planned_date":"2026-09-16","completed_at":""},{"id":6,"group_name":"小红书运营组","platform":"小红书店号","title":"账号基础搭建","action":"蓝V认证、私信设置、绑定门店地址、主页装修和预约入口","due_date":"9月4日","owner":"丽莎","collaborators":"余兰、七七","estimated_cost":600,"actual_cost":null,"status":"pending","completed":0,"acceptance":"店号可搜索和预约","note":"","updated_by":"","updated_at":"","sub_items":null,"planned_date":"2026-08-21","completed_at":""},{"id":7,"group_name":"小红书运营组","platform":"小红书店号","title":"基础内容发布","action":"1条预热、1条环境、1条活动预热、1条开业活动、4条产品、1条路线、1条服务+产品硬广置顶，约10条","due_date":"8月28日—9月12日","owner":"丽莎","collaborators":"余兰、七七","estimated_cost":0,"actual_cost":null,"status":"pending","completed":0,"acceptance":"完成基础内容发布","note":"","updated_by":"","updated_at":"","sub_items":"[{\"id\":1,\"title\":\"预热（1条）\",\"completed\":0},{\"id\":2,\"title\":\"环境（1条）\",\"completed\":0},{\"id\":3,\"title\":\"产品 1/4\",\"completed\":0},{\"id\":4,\"title\":\"产品 2/4\",\"completed\":0},{\"id\":5,\"title\":\"产品 3/4\",\"completed\":0},{\"id\":6,\"title\":\"产品 4/4\",\"completed\":0},{\"id\":7,\"title\":\"活动预热（1条）\",\"completed\":0},{\"id\":8,\"title\":\"开业活动（1条）\",\"completed\":0},{\"id\":9,\"title\":\"koc打卡活动（林可欣安排制作）\",\"completed\":0},{\"id\":10,\"title\":\"路线（1条·视频/视频组制作·门店发布）\",\"completed\":0},{\"id\":11,\"title\":\"服务+产品硬广置顶（1条）\",\"completed\":0}]","planned_date":"2026-09-10","completed_at":""},{"id":9,"group_name":"小红书运营组","platform":"小红书店号","title":"聚光投放","action":"优先投放收藏、咨询表现较好的产品笔记","due_date":"9月8日起","owner":"丽莎","collaborators":"余兰、七七","estimated_cost":15000,"actual_cost":null,"status":"pending","completed":0,"acceptance":"获得曝光、咨询和预约","note":"","updated_by":"","updated_at":"","sub_items":"[{\"id\":1,\"title\":\"平台基础建设（名片、快捷回复等）\",\"completed\":0},{\"id\":2,\"title\":\"提前5天投放收藏、咨询表现较好的产品笔记\",\"completed\":0}]","planned_date":"2026-09-06","completed_at":""},{"id":10,"group_name":"小红书运营组","platform":"小红书总号","title":"总号内容与信息更新","action":"发布1条预热和1条正式开业内容；后台增加杭州2店信息","due_date":"9月2日—9月12日","owner":"七七","collaborators":"余兰、丽莎","estimated_cost":0,"actual_cost":null,"status":"pending","completed":0,"acceptance":"总号完成新店露出","note":"","updated_by":"","updated_at":"","sub_items":null,"planned_date":"2026-09-06","completed_at":""},{"id":11,"group_name":"小红书运营组","platform":"小红书店号","title":"KOC到店打卡","action":"礼品为小帆船眼镜，数量约20-30份，图文由达人组编辑给门店","due_date":"开业后启动","owner":"区域经理","collaborators":"七七、灵榕","estimated_cost":4000,"actual_cost":null,"status":"pending","completed":0,"acceptance":"形成首批口碑","note":"","updated_by":"","updated_at":"","sub_items":null,"planned_date":"2026-09-11","completed_at":""},{"id":12,"group_name":"抖音及视频号组","platform":"抖音店号","title":"基础视频发布","action":"门店装修预热系列、服务介绍1条、路线1条，约3条","due_date":"8月28日—9月12日","owner":"鑫璇、微微","collaborators":"余兰、宇杰","estimated_cost":0,"actual_cost":null,"status":"pending","completed":0,"acceptance":"完成基础视频发布","note":"","updated_by":"","updated_at":"","sub_items":"[{\"id\":1,\"title\":\"门店装修阶段预热系列\",\"completed\":0},{\"id\":2,\"title\":\"服务介绍（1条）\",\"completed\":0},{\"id\":3,\"title\":\"路线（1条）\",\"completed\":0}]","planned_date":"2026-09-08","completed_at":""},{"id":13,"group_name":"抖音及视频号组","platform":"抖音店号","title":"门店装修阶段预热","action":"门店装修阶段预热系列（精神股东）","due_date":"8月28日起","owner":"鑫璇、微微","collaborators":"余兰、宇杰","estimated_cost":0,"actual_cost":null,"status":"pending","completed":0,"acceptance":"开业前形成用户期待和预约意向","note":"","updated_by":"","updated_at":"","sub_items":null,"planned_date":"2026-09-10","completed_at":""},{"id":14,"group_name":"抖音及视频号组","platform":"抖音店号","title":"蓝V认证及本地推","action":"完成认证并启动基础本地推","due_date":"9月8日起","owner":"鑫璇、微微","collaborators":"余兰、宇杰","estimated_cost":3500,"actual_cost":null,"status":"pending","completed":0,"acceptance":"获得本地曝光和咨询","note":"","updated_by":"","updated_at":"","sub_items":null,"planned_date":"2026-08-24","completed_at":""},{"id":15,"group_name":"抖音及视频号组","platform":"抖音来客","title":"团购与核销配置","action":"认领、团购、子账号、核销和数据追踪","due_date":"9月7日","owner":"鑫璇、微微","collaborators":"余兰、宇杰","estimated_cost":0,"actual_cost":null,"status":"pending","completed":0,"acceptance":"团购可展示并核销","note":"","updated_by":"","updated_at":"","sub_items":null,"planned_date":"2026-09-01","completed_at":""},{"id":16,"group_name":"抖音及视频号组","platform":"视频号店号","title":"视频号内容","action":"同步抖音内容","due_date":"8月29日—9月19日","owner":"鑫璇、微微","collaborators":"余兰、宇杰","estimated_cost":0,"actual_cost":null,"status":"pending","completed":0,"acceptance":"老客传播和企微预约","note":"","updated_by":"","updated_at":"","sub_items":null,"planned_date":"2026-09-01","completed_at":""},{"id":17,"group_name":"抖音及视频号组","platform":"视频号店号","title":"总号同步","action":"同步预热及正式开业重点内容；增加杭州2店信息","due_date":"9月2日—9月12日","owner":"鑫璇、微微","collaborators":"余兰、宇杰","estimated_cost":0,"actual_cost":null,"status":"pending","completed":0,"acceptance":"总号完成新店露出","note":"","updated_by":"","updated_at":"","sub_items":null,"planned_date":"2026-09-08","completed_at":""},{"id":18,"group_name":"点评与地图组","platform":"大众点评/美团","title":"店铺基础搭建","action":"认领、装修、团购、私信、问答及门店子账号","due_date":"9月7日","owner":"钰宜","collaborators":"余兰、区域经理","estimated_cost":0,"actual_cost":null,"status":"pending","completed":0,"acceptance":"店铺完整可咨询","note":"","updated_by":"","updated_at":"","sub_items":null,"planned_date":"2026-08-24","completed_at":""},{"id":19,"group_name":"点评与地图组","platform":"大众点评/美团","title":"付费推广","action":"评分达到投放条件后启动搜索推广","due_date":"9月13日起","owner":"余兰","collaborators":"区域经理、钰宜","estimated_cost":12000,"actual_cost":null,"status":"pending","completed":0,"acceptance":"获得搜索曝光和咨询","note":"","updated_by":"","updated_at":"","sub_items":null,"planned_date":"2026-09-04","completed_at":""},{"id":20,"group_name":"点评与地图组","platform":"大众点评/美团","title":"星级维护","action":"开业30天内积累真实评价并持续回复","due_date":"9月13日—10月12日","owner":"区域经理","collaborators":"余兰","estimated_cost":0,"actual_cost":null,"status":"pending","completed":0,"acceptance":"形成稳定口碑","note":"","updated_by":"","updated_at":"","sub_items":null,"planned_date":"2026-09-06","completed_at":""},{"id":21,"group_name":"点评与地图组","platform":"大众点评/美团","title":"门店蓝V及内容","action":"同步门店环境、服务、套餐和路线内容","due_date":"9月7日","owner":"区域经理","collaborators":"余兰、钰宜","estimated_cost":0,"actual_cost":null,"status":"pending","completed":0,"acceptance":"店铺内容完整","note":"","updated_by":"","updated_at":"","sub_items":null,"planned_date":"2026-08-26","completed_at":""},{"id":24,"group_name":"线下活动及私域组","platform":"线下活动","title":"基础开业活动","action":"门店氛围、简单接待、预约核销和现场执行","due_date":"9月12日","owner":"林可欣","collaborators":"陈总、余兰、宇杰","estimated_cost":5000,"actual_cost":null,"status":"pending","completed":0,"acceptance":"现场有序完成","note":"","updated_by":"","updated_at":"","sub_items":null,"planned_date":"2026-09-10","completed_at":""},{"id":26,"group_name":"线下活动及私域组","platform":"线下活动","title":"开业拍摄","action":"视频和图片；现场实时出片并交付精修及原素材","due_date":"9月12日","owner":"文菁","collaborators":"七七","estimated_cost":1000,"actual_cost":null,"status":"pending","completed":0,"acceptance":"完整开业素材","note":"","updated_by":"","updated_at":"","sub_items":null,"planned_date":"2026-09-11","completed_at":""},{"id":27,"group_name":"线下活动及私域组","platform":"线下活动","title":"基础伴手礼","action":"擦镜纸、眼镜收纳盒、清洗机等（仓库库存）","due_date":"9月11日","owner":"余兰、林可欣","collaborators":"陈总、宇杰、区域经理","estimated_cost":1500,"actual_cost":null,"status":"pending","completed":0,"acceptance":"数量及名单核对","note":"","updated_by":"","updated_at":"","sub_items":null,"planned_date":"2026-09-08","completed_at":""},{"id":28,"group_name":"线下活动及私域组","platform":"微信公众号","title":"开业推文","action":"预热推文1篇、正式开业推文1篇，包含路线和预约入口","due_date":"9月2日—9月12日","owner":"丽莎","collaborators":"余兰、七七","estimated_cost":0,"actual_cost":null,"status":"pending","completed":0,"acceptance":"完成2篇推文","note":"","updated_by":"","updated_at":"","sub_items":"[{\"id\":1,\"title\":\"全国门店微信公众号转发\",\"completed\":0},{\"id\":2,\"title\":\"杭州推文1篇\",\"completed\":0}]","planned_date":"2026-09-09","completed_at":""},{"id":30,"group_name":"物料组","platform":"线下物料","title":"电梯口指引牌","action":"提供尺寸、设计定稿、制作并在门店展出","due_date":"9月9日","owner":"林可欣","collaborators":"宇杰、区域经理","estimated_cost":30,"actual_cost":null,"status":"pending","completed":0,"acceptance":"完成到店指引","note":"","updated_by":"","updated_at":"","sub_items":"[{\"id\":1,\"title\":\"设计定稿\",\"completed\":0},{\"id\":2,\"title\":\"设计印刷\",\"completed\":0},{\"id\":3,\"title\":\"门店展出\",\"completed\":0}]","planned_date":"2026-09-06","completed_at":""},{"id":31,"group_name":"物料组","platform":"线下物料","title":"开业活动水牌","action":"展示活动内容、预约方式及注意事项","due_date":"9月9日","owner":"林可欣","collaborators":"宇杰、区域经理","estimated_cost":30,"actual_cost":null,"status":"pending","completed":0,"acceptance":"现场展示","note":"","updated_by":"","updated_at":"","sub_items":null,"planned_date":"2026-09-06","completed_at":""},{"id":32,"group_name":"物料组","platform":"线下物料","title":"KOC打卡水牌","action":"展示打卡规则、内容要求和赠礼说明","due_date":"9月9日","owner":"林可欣","collaborators":"宇杰、区域经理","estimated_cost":30,"actual_cost":null,"status":"pending","completed":0,"acceptance":"现场展示","note":"","updated_by":"","updated_at":"","sub_items":null,"planned_date":"2026-09-06","completed_at":""},{"id":34,"group_name":"复盘","platform":"全平台","title":"开业7天复盘","action":"汇总费用、曝光、咨询、预约、到店和成交","due_date":"9月19日","owner":"陈总、余兰","collaborators":"宇杰、七七、丽莎、鑫璇、微微、区域经理、灵榕、钰宜、林可欣","estimated_cost":0,"actual_cost":null,"status":"pending","completed":0,"acceptance":"形成7天复盘","note":"","updated_by":"","updated_at":"","sub_items":null,"planned_date":"2026-09-18","completed_at":""},{"id":35,"group_name":"复盘","platform":"全平台","title":"开业30天复盘","action":"判断继续、优化或停止的项目","due_date":"10月12日","owner":"陈总、余兰","collaborators":"宇杰、七七、丽莎、鑫璇、微微、区域经理、灵榕、钰宜、林可欣","estimated_cost":0,"actual_cost":null,"status":"pending","completed":0,"acceptance":"形成30天复盘","note":"","updated_by":"","updated_at":"","sub_items":null,"planned_date":"2026-10-11","completed_at":""},{"id":36,"group_name":"项目统筹","platform":"全项目","title":"装修进度跟进","action":"跟进门店装修施工进度，确保硬装按时交付","due_date":"9月4日—9月7日","owner":"陈总","collaborators":"余兰","estimated_cost":0,"actual_cost":null,"status":"pending","completed":0,"acceptance":"装修完工验收","note":"","updated_by":"","updated_at":"","sub_items":null,"planned_date":"2026-09-10","completed_at":""},{"id":37,"group_name":"项目统筹","platform":"全项目","title":"营业执照办理","action":"办理杭州2店门店营业执照、税务登记及相关经营资质","due_date":"8月25日","owner":"陈总","collaborators":"余兰","estimated_cost":0,"actual_cost":null,"status":"pending","completed":0,"acceptance":"证照齐全","note":"","updated_by":"","updated_at":"","sub_items":null,"planned_date":"2026-08-21","completed_at":"2026-07-29"},{"id":38,"group_name":"项目统筹","platform":"全项目","title":"门店手机配置","action":"配置门店专用手机，安装微信、小红书、抖音、点评等必要应用","due_date":"9月2日","owner":"宇杰","collaborators":"陈总、余兰、区域经理","estimated_cost":null,"actual_cost":null,"status":"pending","completed":0,"acceptance":"手机可用","note":"","updated_by":"","updated_at":"","sub_items":null,"planned_date":"2026-08-24","completed_at":""},{"id":39,"group_name":"项目统筹","platform":"全项目","title":"门店手机卡办理","action":"办理杭州2店本地手机号，用于门店对外联系及各平台账号注册绑定","due_date":"9月2日","owner":"宇杰","collaborators":"陈总、余兰、区域经理","estimated_cost":null,"actual_cost":null,"status":"pending","completed":0,"acceptance":"号码激活可用","note":"","updated_by":"","updated_at":"","sub_items":null,"planned_date":"2026-08-24","completed_at":""},{"id":40,"group_name":"项目统筹","platform":"全项目","title":"开业活动方案","action":"确认开业活动主题、优惠政策、活动形式、预约流程及现场动线","due_date":"8月25日","owner":"AC总、余兰、陈总","collaborators":"七七、林可欣","estimated_cost":0,"actual_cost":null,"status":"pending","completed":0,"acceptance":"方案定稿","note":"","updated_by":"","updated_at":"","sub_items":null,"planned_date":"2026-09-06","completed_at":""}],"optional_items":[{"id":1,"type":"达人追加","title":"小红书达人补充10位","platform":"小红书","minimum_cost":4000,"maximum_cost":8000,"content":"前期数据较好时追加本地KOC","expected_effect":"增加约8万—20万曝光","owner":"灵榕","selected":0,"actual_cost":null,"actual_result":null,"note":"","updated_at":""},{"id":2,"type":"内容升级","title":"专业短视频系列升级","platform":"抖音/视频号","minimum_cost":12000,"maximum_cost":30000,"content":"增加脚本、出镜、专业拍摄和剪辑","expected_effect":"增加约15万—35万曝光及咨询","owner":"鑫璇","selected":0,"actual_cost":null,"actual_result":null,"note":"","updated_at":""},{"id":3,"type":"追加投放","title":"小红书聚光追加","platform":"小红书","minimum_cost":10000,"maximum_cost":50000,"content":"对高收藏、高咨询笔记追加投放","expected_effect":"增加曝光、咨询和预约","owner":"丽莎","selected":0,"actual_cost":null,"actual_result":null,"note":"","updated_at":""},{"id":4,"type":"追加投放","title":"抖音本地推追加","platform":"抖音","minimum_cost":10000,"maximum_cost":50000,"content":"对高互动、高私信视频追加投放","expected_effect":"增加本地曝光、咨询和预约","owner":"鑫璇","selected":0,"actual_cost":null,"actual_result":null,"note":"","updated_at":""},{"id":5,"type":"直播","title":"探店或开业直播","platform":"抖音/视频号","minimum_cost":8000,"maximum_cost":25000,"content":"探店直播、开业直播及直播预约权益","expected_effect":"增加观看、咨询和预约","owner":"鑫璇、微微","selected":0,"actual_cost":null,"actual_result":null,"note":"","updated_at":""},{"id":6,"type":"楼宇媒体","title":"写字楼电梯广告","platform":"线下媒体","minimum_cost":21000,"maximum_cost":35000,"content":"按杭州写字楼点位、上刊周期和数量询价","expected_effect":"增强楼宇及周边人群认知","owner":"林可欣","selected":0,"actual_cost":null,"actual_result":null,"note":"","updated_at":""},{"id":7,"type":"城市媒体","title":"杭州本地媒体/生活方式账号","platform":"本地媒体","minimum_cost":10000,"maximum_cost":40000,"content":"3—8个杭州本地账号发布","expected_effect":"增加城市曝光和搜索","owner":"七七","selected":0,"actual_cost":null,"actual_result":null,"note":"","updated_at":""},{"id":8,"type":"客户活动","title":"VIP私享会/下午茶","platform":"线下/私域","minimum_cost":12000,"maximum_cost":35000,"content":"邀请重点客户进行品牌或产品私享活动","expected_effect":"增加到店和成交","owner":"林可欣","selected":0,"actual_cost":null,"actual_result":null,"note":"","updated_at":""},{"id":9,"type":"品牌活动","title":"品牌主题展或产品品鉴","platform":"线下/全平台","minimum_cost":25000,"maximum_cost":80000,"content":"主题展陈、产品、活动及线上传播","expected_effect":"增加声量、到店和成交","owner":"余兰、林可欣","selected":0,"actual_cost":null,"actual_result":null,"note":"","updated_at":""},{"id":10,"type":"异业合作","title":"咖啡/牙科/医美/企业联名","platform":"异业/私域","minimum_cost":0,"maximum_cost":0,"content":"联合权益、客户邀约及活动内容（置换/合作）","expected_effect":"增加预约和成交","owner":"余兰、区域经理","selected":0,"actual_cost":null,"actual_result":null,"note":"","updated_at":""},{"id":11,"type":"企业获客","title":"写字楼企业客户专场","platform":"企微/线下","minimum_cost":10000,"maximum_cost":30000,"content":"企业验光、选镜或员工福利专场","expected_effect":"增加企业预约和成交","owner":"余兰、区域经理","selected":0,"actual_cost":null,"actual_result":null,"note":"","updated_at":""},{"id":12,"type":"礼赠升级","title":"开业礼赠升级","platform":"线下/私域","minimum_cost":8000,"maximum_cost":30000,"content":"提升重点客户和转介绍礼赠","expected_effect":"提升到店、成交和转介绍","owner":"林可欣","selected":0,"actual_cost":null,"actual_result":null,"note":"","updated_at":""},{"id":13,"type":"体验招募","title":"试营业体验官","platform":"全平台","minimum_cost":6000,"maximum_cost":20000,"content":"招募10—30人试营业体验并产出反馈","expected_effect":"增加口碑和预约","owner":"丽莎、区域经理","selected":0,"actual_cost":null,"actual_result":null,"note":"","updated_at":""},{"id":14,"type":"持续传播","title":"开业后30天种草维护","platform":"全平台","minimum_cost":15000,"maximum_cost":45000,"content":"内容、达人、点评和顾客案例持续维护","expected_effect":"维持曝光、口碑和预约","owner":"七七、丽莎、灵榕","selected":0,"actual_cost":null,"actual_result":null,"note":"","updated_at":""},{"id":15,"type":"线下氛围","title":"花艺装扮","platform":"全店","minimum_cost":3000,"maximum_cost":3000,"content":"桌花、花篮及门店氛围布置","expected_effect":"提升门店开业高级感","owner":"林可欣","selected":0,"actual_cost":null,"actual_result":null,"note":"","updated_at":""}]};
+// ===== Init Data =====
+let allTasks = (EMBEDDED && EMBEDDED.tasks) ? EMBEDDED.tasks : [];
+let allOptionals = (EMBEDDED && EMBEDDED.optional_items) ? EMBEDDED.optional_items : [];
+const DATA_VERSION = 'hz2_v1';
+try {
+  const storedVersion = localStorage.getItem('hz2_data_version');
+  if (storedVersion !== DATA_VERSION) {
+    localStorage.removeItem('hz2_state');
+    localStorage.setItem('hz2_data_version', DATA_VERSION);
+  }
+} catch(e) {}
+
+// Restore completion/selection state from localStorage
+try {
+  const saved = JSON.parse(localStorage.getItem('hz2_state'));
+  if (saved && saved.tasks && saved.optionals) {
+    const savedMap = {};
+    saved.tasks.forEach(t => { savedMap[t.id] = t; });
+    allTasks = allTasks.map(t => {
+      const s = savedMap[t.id];
+      if (!s) return t;
+      t.completed = s.completed;
+      t.status = s.status;
+      // t.sub_items stays from embedded data, not localStorage
+      t.updated_at = s.updated_at;
+      t.updated_by = s.updated_by;
+      return t;
+    });
+    const optMap = {};
+    saved.optionals.forEach(o => { optMap[o.id] = o; });
+    allOptionals = allOptionals.map(o => {
+      const so = optMap[o.id];
+      if (!so) return o;
+      o.selected = so.selected;
+      o.actual_cost = so.actual_cost;
+      o.actual_result = so.actual_result;
+      return o;
+    });
+  }
+} catch(e) {}
+
+let currentFilters = { status: 'all', owner: 'all', group: 'all', platform: 'all' };
+let userName = sessionStorage.getItem('hangzhou2_user') || '';
+
+// ===== Helpers =====
+function escHtml(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+// ===== Dashboard =====
+function updateDashboard() {
+  const total = allTasks.length;
+  const done = allTasks.filter(t => t.completed).length;
+  const pending = total - done;
+  const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+  const baseCost = allTasks.reduce((s, t) => s + (t.estimated_cost || 0), 0);
+  const selOpts = allOptionals.filter(o => o.selected);
+  const optMin = selOpts.reduce((s, o) => s + (o.minimum_cost || 0), 0);
+  const optMax = selOpts.reduce((s, o) => s + (o.maximum_cost || 0), 0);
+  const optDone = selOpts.filter(o => o.actual_cost != null).length;
+
+  document.getElementById('statTotal').textContent = total;
+  document.getElementById('statDone').textContent = done;
+  document.getElementById('statPending').textContent = pending;
+  document.getElementById('statPercent').textContent = pct + '%';
+  document.getElementById('statBaseCost').textContent = baseCost.toLocaleString();
+  document.getElementById('statOptDone').textContent = optDone;
+  document.getElementById('statOptCost').textContent = '¥' + optMin.toLocaleString() + ' - ¥' + optMax.toLocaleString();
+}
+
+// ===== Tab Switching =====
+function switchTab(name) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.toggle('active', c.id === 'tab-' + name));
+  if (name === 'overview') renderOverview();
+  if (name === 'tasks') { populateFilters(); renderTasks(); }
+  if (name === 'optional') renderOptionalItems();
+}
+
+// ===== Filters =====
+function populateFilters() {
+  const ownerSet = new Set();
+  allTasks.forEach(t => {
+    t.owner.split('、').forEach(o => { if (o.trim()) ownerSet.add(o.trim()); });
+    if (t.collaborators) t.collaborators.split('、').forEach(c => { if (c.trim()) ownerSet.add(c.trim()); });
+  });
+  const order = ['AC总','陈总','余兰','宇杰','七七','丽莎','鑫璇','微微','区域经理','林可欣','灵榕','钰宜'];
+  const owners = [...ownerSet].sort((a,b) => (order.indexOf(a) === -1 ? 99 : order.indexOf(a)) - (order.indexOf(b) === -1 ? 99 : order.indexOf(b)));
+  populateSelect('filterOwner', owners);
+  populateSelect('filterGroup', [...new Set(allTasks.map(t => t.group_name))]);
+  populateSelect('filterPlatform', [...new Set(allTasks.map(t => t.platform))].sort());
+}
+
+function populateSelect(id, items) {
+  const sel = document.getElementById(id);
+  const label = id === 'filterOwner' ? '人员' : id === 'filterGroup' ? '工作组' : '平台';
+  sel.innerHTML = '<option value="all">全部' + label + '</option>' + items.map(i => '<option value="' + i + '">' + i + '</option>').join('');
+}
+
+function applyFilters() {
+  currentFilters.status = document.getElementById('filterStatus').value;
+  currentFilters.owner = document.getElementById('filterOwner').value;
+  currentFilters.group = document.getElementById('filterGroup').value;
+  currentFilters.platform = document.getElementById('filterPlatform').value;
+  renderTasks();
+}
+
+function clearFilters() {
+  document.getElementById('filterStatus').value = 'all';
+  document.getElementById('filterOwner').value = 'all';
+  document.getElementById('filterGroup').value = 'all';
+  document.getElementById('filterPlatform').value = 'all';
+  applyFilters();
+}
+
+// ===== Render Tasks =====
+function renderTasks() {
+  const container = document.getElementById('taskContainer');
+  let filtered = allTasks;
+  if (currentFilters.status === 'completed') filtered = filtered.filter(t => t.completed);
+  if (currentFilters.status === 'incomplete') filtered = filtered.filter(t => !t.completed);
+  if (currentFilters.owner !== 'all') filtered = filtered.filter(t => t.owner.includes(currentFilters.owner) || (t.collaborators||'').includes(currentFilters.owner));
+  if (currentFilters.group !== 'all') filtered = filtered.filter(t => t.group_name === currentFilters.group);
+  if (currentFilters.platform !== 'all') filtered = filtered.filter(t => t.platform === currentFilters.platform);
+
+  if (filtered.length === 0) {
+    container.innerHTML = '<div class="empty-state"><div class="icon">无匹配任务</div><p>尝试调整筛选条件</p></div>';
+    return;
+  }
+
+  const groups = {};
+  filtered.forEach(t => {
+    if (!groups[t.group_name]) groups[t.group_name] = [];
+    groups[t.group_name].push(t);
+  });
+
+  const allGroupStats = {};
+  allTasks.forEach(t => {
+    if (!allGroupStats[t.group_name]) allGroupStats[t.group_name] = { total: 0, completed: 0 };
+    allGroupStats[t.group_name].total++;
+    if (t.completed) allGroupStats[t.group_name].completed++;
+  });
+
+  const groupColors = { '项目统筹':'#2D6A4F','小红书运营组':'#E07A5F','抖音及视频号组':'#3D405B','点评与地图组':'#F2CC8F','线下活动及私域组':'#81B29A','物料组':'#E07A5F','复盘':'#9B5DE5' };
+  const order = ['项目统筹','小红书运营组','抖音及视频号组','点评与地图组','线下活动及私域组','物料组','复盘'];
+
+  let html = '';
+  order.forEach(gname => {
+    const tasks = groups[gname];
+    if (!tasks || tasks.length === 0) return;
+    const stats = allGroupStats[gname] || { total: 0, completed: 0 };
+    const color = groupColors[gname] || '#666';
+    html += '<div class="task-group">';
+    html += '<div class="group-header">';
+    html += '<div class="group-title"><span class="group-dot" style="background:' + color + '"></span>' + gname + '</div>';
+    html += '<div class="group-stats"><span>' + stats.completed + '/' + stats.total + ' 完成</span></div>';
+    html += '</div>';
+    tasks.forEach(t => { html += taskCardHTML(t); });
+    html += '</div>';
+  });
+  
+  container.innerHTML = html;
+
+  // Enable drag-and-drop on overview cards
+  const cards = container.querySelectorAll('.overview-card');
+  let dragSrc = null;
+  cards.forEach((card, i) => {
+    card.setAttribute('draggable', 'true');
+    card.classList.add('draggable');
+    const handle = document.createElement('div');
+    handle.className = 'drag-handle';
+    handle.innerHTML = '⋮⋮';
+    handle.title = '拖拽排序';
+    card.prepend(handle);
+    
+    card.addEventListener('dragstart', e => {
+      dragSrc = card;
+      card.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+    });
+    card.addEventListener('dragend', e => { card.classList.remove('dragging'); cards.forEach(c => c.classList.remove('drag-over')); });
+    card.addEventListener('dragover', e => { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; });
+    card.addEventListener('dragenter', e => { e.preventDefault(); if (card !== dragSrc) card.classList.add('drag-over'); });
+    card.addEventListener('dragleave', e => { card.classList.remove('drag-over'); });
+    card.addEventListener('drop', e => {
+      e.stopPropagation();
+      card.classList.remove('drag-over');
+      if (dragSrc !== card && dragSrc) {
+        const parent = container;
+        const children = [...parent.children];
+        const srcIdx = children.indexOf(dragSrc);
+        const dstIdx = children.indexOf(card);
+        if (srcIdx < dstIdx) parent.insertBefore(dragSrc, card.nextSibling);
+        else parent.insertBefore(dragSrc, card);
+        // Save order
+        try {
+          const order = [...container.querySelectorAll('.overview-card')].map(c => c.querySelector('h3').textContent);
+          localStorage.setItem('hz2_card_order', JSON.stringify(order));
+        } catch(e) {}
+      }
+      return false;
+    });
+  });
+
+  // Restore saved card order
+  try {
+    const saved = JSON.parse(localStorage.getItem('hz2_card_order'));
+    if (saved && saved.length === cards.length) {
+      saved.forEach(title => {
+        const card = [...container.querySelectorAll('.overview-card')].find(c => c.querySelector('h3').textContent === title);
+        if (card) container.appendChild(card);
+      });
+    }
+  } catch(e) {}
+;
+
+}
+
+function taskCardHTML(t) {
+  const pct = (t.sub_items && t.sub_items !== 'null') ? (()=>{try{const s=JSON.parse(t.sub_items);const d=s.filter(i=>i.completed).length;return Math.round(d/s.length*100)}catch{return 0}})() : 0;
+  const subItems = (()=>{try{return JSON.parse(t.sub_items||'null')}catch{return null}})() || [];
+  const hasSubs = subItems.length > 0;
+  const completed = t.completed ? ' completed' : '';
+  const costStr = (t.estimated_cost || 0) > 0 ? ' / ¥' + (t.estimated_cost||0).toLocaleString() : '';
+
+  let subsHtml = '';
+  if (hasSubs) {
+    subsHtml = '<div class="sub-items">' + subItems.map(s => 
+      '<div class="sub-item'+(s.completed?' done':'')+'"><input type="checkbox" '+(s.completed?'checked':'')+' onchange="toggleSubItem('+t.id+','+s.id+',this.checked)"><span>'+escHtml(s.title)+'</span></div>'
+    ).join('') + '</div>';
+  }
+
+  return '<div class="task-card' + completed + '" onclick="event.stopPropagation()">' +
+    '<div class="task-card-left"><input type="checkbox" ' + (t.completed ? 'checked' : '') + ' onchange="toggleTask(' + t.id + ',this.checked)"></div>' +
+    '<div class="task-card-main"><div class="task-title-row">' +
+    '<span class="task-title">' + escHtml(t.title) + '</span>' +
+    '<span class="task-platform">' + escHtml(t.platform) + costStr + '</span></div>' +
+    '<div class="task-action">' + escHtml(t.action) + '</div>' +
+    '<div class="task-meta"><span class="badge badge-owner">' + escHtml(t.owner) + '</span>' +
+    (t.collaborators ? '<span class="badge badge-collab">' + escHtml(t.collaborators) + '</span>' : '') +
+    '<span style="display:inline-flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:11px;color:var(--text-muted)"><span>预计完成：<input type="date" value="' + escHtml(t.planned_date||'') + '" onchange="updateTaskField(' + t.id + ',\'planned_date\',this.value)" onclick="event.stopPropagation()" style="font-size:11px;padding:1px 4px;border:1px solid var(--border);border-radius:3px;margin-left:2px"></span><span style="color:var(--green)">完成：<input type="date" value="' + escHtml(t.completed_at||'') + '" onchange="updateTaskField(' + t.id + ',\'completed_at\',this.value)" onclick="event.stopPropagation()" style="font-size:11px;padding:1px 4px;border:1px solid var(--border);border-radius:3px"></span></span></div>' +
+    subsHtml +
+    (hasSubs ? '<div class="sub-progress"><div class="sub-progress-bar"><div class="sub-progress-fill" style="width:'+pct+'%"></div></div><span>'+pct+'%</span></div>' : '') +
+    '</div>' +
+    '<div class="task-card-right"><div class="task-status ' + (t.completed ? 'done' : '') + '">' + (t.completed ? '✓ 完成' : '待处理') + '</div></div></div>';
+}
+
+// ===== Render Overview =====
+function renderOverview() {
+  const container = document.getElementById('overviewContent');
+  const order = ['AC总','陈总','余兰','宇杰','七七','丽莎','鑫璇','微微','区域经理','林可欣','灵榕','钰宜'];
+  const orderRank = {}; order.forEach((n,i) => orderRank[n] = i);
+
+  let html = '';
+
+  // Section 1: 项目进度统计
+  const total = allTasks.length, done = allTasks.filter(t => t.completed).length;
+  const pct = total > 0 ? Math.round(done/total*100) : 0;
+  const baseCost = allTasks.reduce((s,t) => s+(t.estimated_cost||0),0);
+  const selOpts = allOptionals.filter(o => o.selected);
+  const optMin = selOpts.reduce((s,o)=>s+(o.minimum_cost||0),0);
+  const optMax = selOpts.reduce((s,o)=>s+(o.maximum_cost||0),0);
+
+  html += '<div class="overview-card"><h3>项目进度统计</h3><div class="progress-big"><div class="progress-big-fill" style="width:'+pct+'%"></div></div><span style="font-size:28px;font-weight:700;color:var(--green)">'+pct+'%</span>' +
+    '<div style="margin-top:8px;color:var(--text-muted)">'+done+'/'+total+' 项已完成 · 基础预算 ¥'+baseCost.toLocaleString()+' · 新增预算 ¥'+optMin.toLocaleString()+' — ¥'+optMax.toLocaleString()+'</div></div>';
+
+  // Section 2: 人员分工总览
+  const peopleMap = {};
+  allTasks.forEach(t => {
+    const ownerParts = t.owner.split('、').map(s=>s.trim()).filter(Boolean);
+    const seen = new Set();
+    if (ownerParts.length === 1) {
+      const o = ownerParts[0];
+      if (!peopleMap[o]) peopleMap[o] = { tasks: 0, groups: new Set() };
+      peopleMap[o].tasks++;
+      peopleMap[o].groups.add(t.group_name);
+      seen.add(o);
+    }
+    if (t.collaborators) {
+      t.collaborators.split('、').forEach(c => { c=c.trim(); if(c&&!seen.has(c)) { if(!peopleMap[c]) peopleMap[c]={tasks:0,groups:new Set()}; peopleMap[c].tasks++; peopleMap[c].groups.add(t.group_name); seen.add(c); }});
+    }
+  });
+  const sortedPeople = Object.entries(peopleMap).sort((a,b)=>(orderRank[a[0]]??99)-(orderRank[b[0]]??99));
+  html += '<div class="overview-card"><h3>人员分工总览</h3><div class="people-grid">';
+  sortedPeople.forEach(([name, info]) => {
+    html += '<div class="people-chip"><strong>'+escHtml(name)+'</strong><span>'+info.tasks+' 项</span></div>';
+  });
+  html += '</div></div>';
+
+  // Section 3: 费用分布
+  const platformCosts = {};
+  allTasks.forEach(t => { const c = t.estimated_cost||0; if (c>0) platformCosts[t.platform] = (platformCosts[t.platform]||0) + c; });
+  const sortedPlat = Object.entries(platformCosts).sort((a,b)=>b[1]-a[1]);
+  html += '<div class="overview-card"><h3>基础费用分布</h3>';
+  const maxCost = Math.max(...sortedPlat.map(e=>e[1]), 1);
+  sortedPlat.forEach(([p,c]) => {
+    const w = Math.round(c/maxCost*100);
+    html += '<div style="display:flex;align-items:center;margin:8px 0;gap:8px"><span style="width:100px;font-size:12px">'+escHtml(p)+'</span><div style="flex:1;height:16px;background:#e0e0e0;border-radius:4px;overflow:hidden"><div style="height:100%;width:'+w+'%;background:var(--green);border-radius:4px"></div></div><span style="font-size:12px;font-weight:600">¥'+c.toLocaleString()+'</span></div>';
+  });
+  html += '</div>';
+
+  // Section 4: 分组进度
+  const groupMap = {};
+  const groupColors = { '项目统筹':'#2D6A4F','小红书运营组':'#E07A5F','抖音及视频号组':'#3D405B','点评与地图组':'#F2CC8F','线下活动及私域组':'#81B29A','物料组':'#E07A5F','复盘':'#9B5DE5' };
+  allTasks.forEach(t => {
+    if (!groupMap[t.group_name]) groupMap[t.group_name] = { total:0, completed:0, cost:0, owners:new Set() };
+    groupMap[t.group_name].total++;
+    if (t.completed) groupMap[t.group_name].completed++;
+    groupMap[t.group_name].cost += (t.estimated_cost||0);
+    t.owner.split('、').forEach(o => { if(o.trim()) groupMap[t.group_name].owners.add(o.trim()); });
+    if (t.collaborators) t.collaborators.split('、').forEach(c => { if(c.trim()) groupMap[t.group_name].owners.add(c.trim()); });
+  });
+  const groupOrder = ['项目统筹','小红书运营组','抖音及视频号组','点评与地图组','线下活动及私域组','物料组','复盘'];
+  html += '<div class="overview-card"><h3>分组进度</h3>';
+  groupOrder.forEach(gname => {
+    const g = groupMap[gname]; if (!g) return;
+    const gpct = g.total>0 ? Math.round(g.completed/g.total*100) : 0;
+    const color = groupColors[gname]||'#666';
+    html += '<div class="group-summary"><div class="group-summary-icon" style="background:'+color+'20;color:'+color+'">'+g.completed+'/'+g.total+'</div>' +
+      '<div class="group-summary-body"><div class="group-summary-name">'+gname+'</div>' +
+      '<div class="group-summary-meta">'+[...g.owners].sort((a,b)=>(orderRank[a]??99)-(orderRank[b]??99)).join('、')+'</div>' +
+      '<div class="group-summary-bar"><div class="group-summary-bar-fill" style="width:'+gpct+'%;background:'+color+'"></div></div></div>' +
+      '<div class="group-summary-cost">¥'+g.cost.toLocaleString()+'</div></div>';
+  });
+  html += '</div>';
+
+  // Section 5: 关键时间节点
+  html += '<div class="overview-card"><h3>关键时间节点</h3><div class="timeline">';
+  const keyDates = [
+    { date: '8月7日', text: '整体方案输出 & 预算申请截止' },
+    { date: '8月10日', text: '宣传图文统一定稿' },
+    { date: '8月13日', text: '小红书内容 & 抖音视频开始发布' },
+    { date: '8月20日', text: '小红书店号基础搭建完成' },
+    { date: '8月23日', text: '点评店铺搭建 & 团购配置完成' },
+    { date: '8月25日', text: '线下物料设计制作完成' },
+    { date: '8月27日', text: '伴手礼准备完毕' },
+    { date: '8月28日', text: '正式开业 & 开业拍摄' },
+    { date: '9月4日', text: '开业7天复盘' },
+    { date: '9月27日', text: '开业30天复盘' },
+  ];
+  keyDates.forEach((kd, i) => {
+    html += '<div class="timeline-item"><div class="timeline-dot" style="'+(i===0?'background:var(--green)':'')+'"></div><div class="timeline-date">'+kd.date+'</div><div class="timeline-text">'+kd.text+'</div></div>';
+  });
+  html += '</div></div>';
+
+  // Section 6: 开业活动内容
+  html += '<div class="overview-card"><h3>开业活动内容</h3><div style="background:#fdf6e8;border:1px dashed var(--warm-yellow);border-radius:8px;padding:16px;text-align:center;margin-bottom:12px"><span style="font-size:14px;color:var(--warm-yellow);font-weight:600">待定</span><p style="font-size:12px;color:var(--text-muted);margin-top:6px">开业主题、活动优惠、活动形式等内容尚未确定</p></div><p style="font-size:13px;color:var(--text-secondary)">基础开业活动：¥5,000（门店氛围布置、接待台搭建、茶歇/小礼品）</p><p style="font-size:13px;color:var(--text-secondary)">开业拍摄：¥1,000（文菁负责，七七协同）</p><p style="font-size:13px;color:var(--text-secondary)">可选花艺装扮：¥3,000（桌花、花篮及门店氛围布置）</p><div style="margin-top:12px;font-size:12px;color:var(--text-muted);display:flex;gap:16px"><span>负责人：AC总</span><span>协同：陈总、余兰</span></div></div>';
+
+  
+  container.innerHTML = html;
+
+  // Enable drag-and-drop on overview cards
+  const cards = container.querySelectorAll('.overview-card');
+  let dragSrc = null;
+  cards.forEach((card, i) => {
+    card.setAttribute('draggable', 'true');
+    card.classList.add('draggable');
+    const handle = document.createElement('div');
+    handle.className = 'drag-handle';
+    handle.innerHTML = '⋮⋮';
+    handle.title = '拖拽排序';
+    card.prepend(handle);
+    
+    card.addEventListener('dragstart', e => {
+      dragSrc = card;
+      card.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+    });
+    card.addEventListener('dragend', e => { card.classList.remove('dragging'); cards.forEach(c => c.classList.remove('drag-over')); });
+    card.addEventListener('dragover', e => { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; });
+    card.addEventListener('dragenter', e => { e.preventDefault(); if (card !== dragSrc) card.classList.add('drag-over'); });
+    card.addEventListener('dragleave', e => { card.classList.remove('drag-over'); });
+    card.addEventListener('drop', e => {
+      e.stopPropagation();
+      card.classList.remove('drag-over');
+      if (dragSrc !== card && dragSrc) {
+        const parent = container;
+        const children = [...parent.children];
+        const srcIdx = children.indexOf(dragSrc);
+        const dstIdx = children.indexOf(card);
+        if (srcIdx < dstIdx) parent.insertBefore(dragSrc, card.nextSibling);
+        else parent.insertBefore(dragSrc, card);
+        // Save order
+        try {
+          const order = [...container.querySelectorAll('.overview-card')].map(c => c.querySelector('h3').textContent);
+          localStorage.setItem('hz2_card_order', JSON.stringify(order));
+        } catch(e) {}
+      }
+      return false;
+    });
+  });
+
+  // Restore saved card order
+  try {
+    const saved = JSON.parse(localStorage.getItem('hz2_card_order'));
+    if (saved && saved.length === cards.length) {
+      saved.forEach(title => {
+        const card = [...container.querySelectorAll('.overview-card')].find(c => c.querySelector('h3').textContent === title);
+        if (card) container.appendChild(card);
+      });
+    }
+  } catch(e) {}
+;
+}
+
+// ===== Optional Items =====
+function renderOptionalItems() {
+  const grid = document.getElementById('optionalGrid');
+  if (allOptionals.length === 0) { grid.innerHTML = '<div class="empty-state"><div class="icon">暂无项目</div></div>'; return; }
+
+  grid.innerHTML = allOptionals.map(o => {
+    const sel = o.selected ? ' selected' : '';
+    return '<div class="optional-card'+sel+'">' +
+      '<div class="optional-card-header"><div style="flex:1"><div class="card-type">'+escHtml(o.type)+'</div>' +
+      '<div class="card-title">'+escHtml(o.title)+'</div><span class="card-platform">'+escHtml(o.platform)+'</span></div>' +
+      '<button class="opt-toggle '+(o.selected?'on':'off')+'" onclick="event.stopPropagation();toggleOptional('+o.id+','+(o.selected?0:1)+')">'+(o.selected?'✓ 已选':'+ 选择')+'</button></div>' +
+      '<div class="card-cost-range">'+(o.minimum_cost===0 && o.maximum_cost===0 ? '置换/免费' : '预算：¥'+(o.minimum_cost||0).toLocaleString()+' — ¥'+(o.maximum_cost||0).toLocaleString())+'</div>' +
+      '<div class="card-content">'+escHtml(o.content)+'</div>' +
+      '<div class="card-effect">预计作用：'+escHtml(o.expected_effect)+'</div>' +
+      '<div class="card-owner">负责人：'+escHtml(o.owner)+'</div>' +
+      '<div class="card-editable"><input type="number" placeholder="实际花费" value="'+(o.actual_cost||'')+'" onchange="updateOptionalField('+o.id+',\'actual_cost\',this.value?parseInt(this.value):null)" onclick="event.stopPropagation()">' +
+      '<input type="text" placeholder="实际结果" value="'+escHtml(o.actual_result||'')+'" style="width:140px" onchange="updateOptionalField('+o.id+',\'actual_result\',this.value)" onclick="event.stopPropagation()"></div></div>';
+  }).join('');
+
+  updateOptionalSummary();
+}
+
+function updateOptionalSummary() {
+  const sel = allOptionals.filter(o => o.selected);
+  document.getElementById('optSelectedCount').textContent = sel.length + '/' + allOptionals.length;
+  document.getElementById('optMinTotal').textContent = '¥' + sel.reduce((s,o)=>s+(o.minimum_cost||0),0).toLocaleString();
+  document.getElementById('optMaxTotal').textContent = '¥' + sel.reduce((s,o)=>s+(o.maximum_cost||0),0).toLocaleString();
+}
+
+// ===== Actions =====
+function saveState() { try { localStorage.setItem('hz2_state', JSON.stringify({ tasks: allTasks, optionals: allOptionals })); } catch {} }
+function syncAllToServer() {
+  if (!serverOnline) return;
+  localChangePending = true; lastLocalChange = Date.now();
+  syncToServer("/api/state", { tasks: allTasks, optionals: allOptionals, updated_by: userName });
+  notifySave(userName, '保存了全部数据', '', []);
+  setTimeout(function(){ localChangePending = false; }, 3000);
+}
+function showSaved() {
+  var h = document.getElementById("savedHint");
+  h.style.opacity = "1";
+  setTimeout(function(){ h.style.opacity = "0"; }, 2000);
+}
+
+let serverOnline = false;
+const API_BASE = window.location.origin;
+let localChangePending = false;
+let lastLocalChange = 0;
+let lastKnownVersion = 0;
+let lastKnownUpdater = '';
+
+// ===== Notification System =====
+let notifications = [];
+let unreadCount = 0;
+
+function loadNotifications() {
+  try { notifications = JSON.parse(localStorage.getItem('hz2_notifications')) || []; } catch(e) { notifications = []; }
+  unreadCount = parseInt(localStorage.getItem('hz2_unread_count') || '0');
+}
+
+function saveNotifications() {
+  try {
+    localStorage.setItem('hz2_notifications', JSON.stringify(notifications.slice(0, 50)));
+    localStorage.setItem('hz2_unread_count', String(unreadCount));
+  } catch(e) {}
+}
+
+function addNotification(who, action, detail, tasks) {
+  notifications.unshift({ who, action, detail, tasks: tasks || [], time: Date.now() });
+  unreadCount++;
+  saveNotifications();
+  renderNotifList();
+  updateNotifBadge();
+  // Browser desktop notification
+  showDesktopNotification(who, action, detail, tasks);
+  // Shake bell
+  const bell = document.getElementById('notifBtn');
+  if (bell) {
+    bell.classList.remove('ringing');
+    void bell.offsetWidth; // restart animation
+    bell.classList.add('ringing');
+  }
+}
+
+function clearAllNotifications() {
+  notifications = [];
+  unreadCount = 0;
+  saveNotifications();
+  renderNotifList();
+  updateNotifBadge();
+}
+
+function updateNotifBadge() {
+  const badge = document.getElementById('notifBadge');
+  if (unreadCount > 0) {
+    badge.style.display = 'flex';
+    badge.textContent = unreadCount > 99 ? '99+' : unreadCount;
+  } else {
+    badge.style.display = 'none';
+  }
+}
+
+function renderNotifList() {
+  const list = document.getElementById('notifList');
+  if (!list) return;
+  if (notifications.length === 0) {
+    list.innerHTML = '<div class="notif-empty">暂无动态</div>';
+    return;
+  }
+  list.innerHTML = notifications.slice(0, 30).map((n, i) => {
+    const time = new Date(n.time).toLocaleString('zh-CN', { hour: '2-digit', minute: '2-digit', month: 'short', day: 'numeric' });
+    const tasksHtml = (n.tasks && n.tasks.length > 0)
+      ? '<div class="notif-tasks">' + n.tasks.slice(0, 3).map(t => '<div class="' + (t.completed ? 'task-done' : 'task-pending') + '">' + (t.completed ? '✅' : '⏳') + ' ' + t.title + '</div>').join('') + (n.tasks.length > 3 ? '<div class="task-pending">等 ' + n.tasks.length + ' 项</div>' : '') + '</div>'
+      : '';
+    return '<div class="notif-item' + (i < unreadCount ? ' unread' : '') + '"><span class="notif-who">' + n.who + '</span>' + n.action + (n.detail ? '<div class="notif-detail">' + n.detail + '</div>' : '') + tasksHtml + '<div class="notif-time">' + time + '</div></div>';
+  }).join('');
+}
+
+function showDesktopNotification(who, action, detail, tasks) {
+  if (!('Notification' in window) || Notification.permission !== 'granted') return;
+  const taskStr = tasks && tasks.length > 0 ? ' · ' + tasks.slice(0, 2).map(t => t.title).join('、') : '';
+  const body = (detail || '') + taskStr;
+  try {
+    new Notification('🏪 杭州2店进度更新', {
+      body: who + ' ' + action + (body ? '\n' + body : ''),
+      icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🏪</text></svg>',
+      tag: 'xiamen-store'
+    });
+  } catch(e) {}
+}
+
+function requestNotifPermission() {
+  if ('Notification' in window && Notification.permission === 'default') {
+    Notification.requestPermission();
+  }
+}
+
+// ===== Toast Notifications =====
+function showToast(who, action, detail) {
+  var c = document.getElementById('toastContainer');
+  var toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.innerHTML = '<div class="toast-who">🔄 ' + who + ' ' + action + '</div>' + (detail ? '<div class="toast-detail">' + detail + '</div>' : '');
+  c.appendChild(toast);
+  setTimeout(function() {
+    toast.classList.add('removing');
+    setTimeout(function() { if (toast.parentNode) toast.parentNode.removeChild(toast); }, 300);
+  }, 4000);
+}
+
+// ===== Notify Save =====
+async function notifySave(who, action, detail, tasks) {
+  try {
+    await fetch(API_BASE + '/api/notify', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ who: who, action: action, detail: detail, tasks: tasks })
+    });
+  } catch(e) {}
+}
+
+async function syncToServer(url, data) {
+  try {
+    const resp = await fetch(API_BASE + url, { method: "PUT", headers: {"Content-Type":"application/json"}, body: JSON.stringify(data) });
+    if (resp.ok) serverOnline = true;
+  } catch(e) { serverOnline = false; }
+}
+
+async function pollFromServer() {
+  if (localChangePending && Date.now() - lastLocalChange < 3000) return;
+  try {
+    const vRes = await fetch(API_BASE + "/api/version");
+    if (!vRes.ok) { serverOnline = false; updateSyncStatus(false); return; }
+    serverOnline = true;
+    const vInfo = await vRes.json();
+    // Only fetch full state if version changed
+    if (vInfo.version === lastKnownVersion) { updateSyncStatus(true); return; }
+    
+    const stateRes = await fetch(API_BASE + "/api/state");
+    if (!stateRes.ok) return;
+    const state = await stateRes.json();
+    const sTasks = state.tasks, sOpts = state.optional_items;
+    const sMap = {}; sTasks.forEach(t => { sMap[t.id] = t; });
+    let changed = false, changedTasks = [];
+    allTasks = allTasks.map(t => {
+      const s = sMap[t.id]; if (!s) return t;
+      if (s.completed !== t.completed || s.sub_items !== t.sub_items || s.status !== t.status) {
+        changed = true;
+        changedTasks.push({ id: t.id, title: t.title, completed: s.completed === 1 });
+        t.completed = s.completed; t.sub_items = s.sub_items; t.status = s.status;
+      }
+      return t;
+    });
+    const oMap = {}; sOpts.forEach(o => { oMap[o.id] = o; });
+    allOptionals = allOptionals.map(o => {
+      const so = oMap[o.id]; if (!so) return o;
+      if (so.selected !== o.selected) { changed = true; o.selected = so.selected; o.actual_cost = so.actual_cost; o.actual_result = so.actual_result; }
+      return o;
+    });
+    if (changed && state.last_updated_by && state.last_updated_by !== userName) {
+      var detail = changedTasks.length > 0 ? changedTasks.slice(0,3).map(function(t){ return t.title + (t.completed?' ✅':' 🔄'); }).join('、') : '';
+      if (changedTasks.length > 3) detail += ' 等' + changedTasks.length + '项';
+      showToast(state.last_updated_by, '更新了进度', detail);
+      addNotification(state.last_updated_by, '更新了进度', detail, changedTasks.map(function(t){ return { title: t.title, completed: t.completed }; }));
+    }
+    if (changed) {
+      saveState(); updateDashboard();
+      var at = document.querySelector(".tab-content.active");
+      if (at) { if (at.id === "tab-tasks") renderTasks(); if (at.id === "tab-optional") renderOptionalItems(); if (at.id === "tab-overview") renderOverview(); }
+    }
+    lastKnownVersion = vInfo.version;
+    lastKnownUpdater = state.last_updated_by || '';
+    updateSyncStatus(true);
+  } catch(e) {
+    serverOnline = false;
+    updateSyncStatus(false);
+  }
+}
+
+function updateSyncStatus(online) {
+  if (online) {
+    document.getElementById("syncDot").style.background = "var(--green)";
+    document.getElementById("syncText").textContent = "已同步";
+  } else {
+    document.getElementById("syncDot").style.background = "#ccc";
+    document.getElementById("syncText").textContent = "离线模式";
+  }
+}
+
+
+function toggleTask(id, completed) {
+  const idx = allTasks.findIndex(t => t.id === id); if (idx < 0) return;
+  allTasks[idx].completed = completed ? 1 : 0;
+  allTasks[idx].status = completed ? 'completed' : 'pending';
+  if (completed && !allTasks[idx].completed_at) allTasks[idx].completed_at = new Date().toISOString().split('T')[0];
+  if (!completed) allTasks[idx].completed_at = '';
+  localChangePending = true; lastLocalChange = Date.now();
+  saveState(); syncToServer("/api/tasks/" + id, { completed: completed ? 1 : 0, updated_by: userName }); syncToServer("/api/state", { tasks: allTasks, optionals: allOptionals, updated_by: userName });
+  notifySave(userName, completed ? '完成了' : '取消完成了', allTasks[idx].title, [{title: allTasks[idx].title, completed: completed}]);
+  setTimeout(function(){ localChangePending = false; }, 3000);
+  renderTasks(); renderOverview(); updateDashboard();
+}
+
+function toggleSubItem(taskId, subId, completed) {
+  const idx = allTasks.findIndex(t => t.id === taskId); if (idx < 0) return;
+  const subs = JSON.parse(allTasks[idx].sub_items || '[]');
+  const sub = subs.find(s => s.id === subId); if (!sub) return;
+  sub.completed = completed ? 1 : 0;
+  allTasks[idx].sub_items = JSON.stringify(subs);
+  allTasks[idx].completed = subs.every(s => s.completed) ? 1 : 0;
+  allTasks[idx].status = allTasks[idx].completed ? 'completed' : 'pending';
+  saveState(); syncToServer("/api/tasks/" + taskId + "/sub-items/" + subId, { completed: completed ? 1 : 0, updated_by: userName }); syncToServer("/api/state", { tasks: allTasks, optionals: allOptionals, updated_by: userName });
+  var t = allTasks.find(function(t){ return t.id === taskId; });
+  notifySave(userName, completed ? '完成了子任务' : '取消子任务', (t?t.title:'') + ' > ' + (sub?sub.title:''), [{title: (t?t.title:'') + ' > ' + (sub?sub.title:''), completed: completed}]);
+  localChangePending = true; lastLocalChange = Date.now();
+  setTimeout(function(){ localChangePending = false; }, 3000);
+  renderTasks(); renderOverview(); updateDashboard();
+}
+
+function toggleOptional(id, selected) {
+  const idx = allOptionals.findIndex(o => o.id === id); if (idx < 0) return;
+  allOptionals[idx].selected = selected ? 1 : 0;
+  saveState(); syncToServer('/api/optional-items/' + id, { selected: selected ? 1 : 0, updated_by: userName });
+  notifySave(userName, selected ? '选中了可选项目' : '取消选中', allOptionals[idx].title, [{title: allOptionals[idx].title, completed: false}]);
+  localChangePending = true; lastLocalChange = Date.now();
+  setTimeout(function(){ localChangePending = false; }, 3000);
+  renderOptionalItems(); renderOverview(); updateDashboard();
+}
+
+function updateTaskField(id, field, value) { const idx = allTasks.findIndex(t => t.id === id); if (idx < 0) return; allTasks[idx][field] = value; saveState(); syncToServer('/api/tasks/' + id, Object.assign({}, { [field]: value, updated_by: userName })); renderTasks(); }
+function updateOptionalField(id, field, value) {
+  const idx = allOptionals.findIndex(o => o.id === id); if (idx < 0) return;
+  allOptionals[idx][field] = value;
+  saveState(); renderOptionalItems(); updateDashboard();
+}
+
+// ===== Init =====
+document.addEventListener('DOMContentLoaded', () => {
+  if (userName) document.getElementById('userName').value = userName;
+  document.getElementById('userName').addEventListener('change', e => { userName = e.target.value.trim(); sessionStorage.setItem('hangzhou2_user', userName); });
+
+  // Notification bell
+  loadNotifications();
+  renderNotifList();
+  updateNotifBadge();
+  requestNotifPermission();
+  document.getElementById('notifBtn').addEventListener('click', e => {
+    e.stopPropagation();
+    const dd = document.getElementById('notifDropdown');
+    dd.classList.toggle('open');
+    if (dd.classList.contains('open')) {
+      unreadCount = 0;
+      saveNotifications();
+      updateNotifBadge();
+    }
+  });
+  document.addEventListener('click', e => {
+    const dd = document.getElementById('notifDropdown');
+    if (dd && !dd.contains(e.target) && !e.target.closest('.notif-bell')) {
+      dd.classList.remove('open');
+    }
+  });
+  document.querySelectorAll('.tab-btn').forEach(btn => btn.addEventListener('click', () => switchTab(btn.dataset.tab)));
+  (function enableTabDrag(){
+    var bar = document.querySelector('.tab-bar');
+    var btns = bar.querySelectorAll('.tab-btn');
+    var dragSrc = null;
+    btns.forEach(function(btn){
+      btn.setAttribute('draggable','true');
+      btn.classList.add('draggable');
+      btn.addEventListener('dragstart',function(e){dragSrc=btn;btn.classList.add('dragging');e.dataTransfer.effectAllowed='move';});
+      btn.addEventListener('dragend',function(e){btn.classList.remove('dragging');btns.forEach(function(b){b.classList.remove('drag-over');});});
+      btn.addEventListener('dragover',function(e){e.preventDefault();e.dataTransfer.dropEffect='move';});
+      btn.addEventListener('dragenter',function(e){e.preventDefault();if(btn!==dragSrc)btn.classList.add('drag-over');});
+      btn.addEventListener('dragleave',function(e){btn.classList.remove('drag-over');});
+      btn.addEventListener('drop',function(e){e.stopPropagation();btn.classList.remove('drag-over');if(dragSrc!==btn&&dragSrc){var c=[].slice.call(bar.querySelectorAll('.tab-btn'));var si=c.indexOf(dragSrc),di=c.indexOf(btn);if(si<di)bar.insertBefore(dragSrc,btn.nextSibling);else bar.insertBefore(dragSrc,btn);try{localStorage.setItem('hz2_tab_order',JSON.stringify([].slice.call(bar.querySelectorAll('.tab-btn')).map(function(b){return b.dataset.tab})))}catch(e){}}return false;});
+    });
+    try{var s=JSON.parse(localStorage.getItem('hz2_tab_order'));if(s&&s.length===btns.length){s.forEach(function(t){var b=[].slice.call(bar.querySelectorAll('.tab-btn')).find(function(x){return x.dataset.tab===t});if(b)bar.insertBefore(b,bar.querySelector('.tab-drag-hint'));})}}catch(e){}
+  })();
+  document.getElementById('filterStatus').addEventListener('change', applyFilters);
+  document.getElementById('filterOwner').addEventListener('change', applyFilters);
+  document.getElementById('filterGroup').addEventListener('change', applyFilters);
+  document.getElementById('filterPlatform').addEventListener('change', applyFilters);
+  document.getElementById('filterClear').addEventListener('click', clearFilters);
+  populateFilters();
+  updateDashboard();
+  switchTab('overview'); setInterval(pollFromServer, 5000); pollFromServer(); setInterval(pollFromServer, 5000); pollFromServer();
+  setInterval(pollFromServer, 5000);
+  pollFromServer();
+});
+
+</script>
+</body>
+</html>
