@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>杭州2店开业项目 · 进度报告</title>
+<style>
+  :root {
+    --bg: #0f0f14;
+    --card: #1a1a24;
+    --border: #2a2a3a;
+    --text: #e0e0e8;
+    --text-dim: #8888a0;
+    --red: #ff4455;
+    --red-bg: rgba(255,68,85,0.12);
+    --yellow: #f0a030;
+    --yellow-bg: rgba(240,160,48,0.10);
+    --green: #22c55e;
+    --green-bg: rgba(34,197,94,0.10);
+    --blue: #4da6ff;
+    --purple: #a78bfa;
+    --radius: 12px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 24px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  .header {
+    text-align: center;
+    padding: 32px 0 24px;
+  }
+  .header h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .header .date {
+    color: var(--text-dim);
+    font-size: 13px;
+    margin-top: 4px;
+  }
+  .header .subtitle {
+    color: var(--purple);
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .kpi {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 16px;
+    text-align: center;
+  }
+  .kpi .num {
+    font-size: 28px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.2;
+  }
+  .kpi .label {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+  .kpi.danger .num { color: var(--red); }
+  .kpi.warn .num { color: var(--yellow); }
+  .kpi.info .num { color: var(--blue); }
+  .section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title .icon { font-size: 18px; }
+  .section-title .count {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 10px;
+  }
+  .count.red { background: var(--red-bg); color: var(--red); }
+  .count.yellow { background: var(--yellow-bg); color: var(--yellow); }
+  .task-list { list-style: none; }
+  .task-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    margin-bottom: 4px;
+    font-size: 13px;
+  }
+  .task-item.overdue {
+    background: var(--red-bg);
+    border-left: 3px solid var(--red);
+  }
+  .task-item.warning {
+    background: var(--yellow-bg);
+    border-left: 3px solid var(--yellow);
+  }
+  .task-item .badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 4px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .badge.red { background: var(--red); color: #fff; }
+  .badge.yellow { background: var(--yellow); color: #111; }
+  .task-item .info { flex: 1; min-width: 0; }
+  .task-item .title { font-weight: 600; color: #fff; }
+  .task-item .meta { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+  .task-item .due { font-size: 11px; white-space: nowrap; flex-shrink: 0; }
+  .due.urgent { color: var(--red); font-weight: 700; }
+  .due.warn { color: var(--yellow); font-weight: 600; }
+
+  .group-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 10px;
+  }
+  .group-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+  }
+  .group-card .gname {
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .group-card .gbar {
+    height: 6px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 3px;
+    margin-bottom: 8px;
+    overflow: hidden;
+    display: flex;
+  }
+  .group-card .gbar .done { background: var(--green); }
+  .group-card .gbar .left { background: rgba(255,255,255,0.08); }
+  .group-card .gstats {
+    font-size: 11px;
+    color: var(--text-dim);
+    display: flex;
+    gap: 10px;
+  }
+  .group-card .gstats span { color: #fff; font-weight: 600; }
+  .group-card .gstats .red-dot { color: var(--red); }
+  .group-card .gstats .yellow-dot { color: var(--yellow); }
+
+  .progress-bar-wrap {
+    height: 8px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 4px;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--green), #16a34a);
+    border-radius: 4px;
+    transition: width 0.5s;
+  }
+
+  .summary-box {
+    background: linear-gradient(135deg, rgba(255,68,85,0.08), rgba(240,160,48,0.06));
+    border: 1px solid rgba(255,68,85,0.2);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin-bottom: 16px;
+  }
+  .summary-box h3 {
+    font-size: 14px;
+    color: var(--red);
+    margin-bottom: 8px;
+  }
+  .summary-box p {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.8;
+  }
+  .footer {
+    text-align: center;
+    padding: 16px;
+    color: var(--text-dim);
+    font-size: 11px;
+  }
+  @media (max-width: 600px) {
+    .kpi-row { grid-template-columns: repeat(2, 1fr); }
+    .group-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🕶️ 杭州2店开业项目进度报告</h1>
+  <div class="date">数据更新：2026年8月10日 09:00（周一）</div>
+  <div class="subtitle">距开业约20天 · 连续8天零进展 · 首批截止日已过</div>
+</div>
+
+<!-- KPI 面板 -->
+<div class="kpi-row">
+  <div class="kpi">
+    <div class="num">34</div>
+    <div class="label">总任务数</div>
+  </div>
+  <div class="kpi danger">
+    <div class="num">0%</div>
+    <div class="label">完成率</div>
+  </div>
+  <div class="kpi danger">
+    <div class="num">4</div>
+    <div class="label">🔴 已逾期</div>
+  </div>
+  <div class="kpi warn">
+    <div class="num">6</div>
+    <div class="label">🟡 7天内到期</div>
+  </div>
+</div>
+
+<div class="progress-bar-wrap">
+  <div class="progress-bar-fill" style="width: 0%"></div>
+</div>
+
+<!-- 风险摘要 -->
+<div class="summary-box">
+  <h3>⚠️ 风险升级 — 首批截止已逾期，项目仍未启动</h3>
+  <p>
+    🔴 <strong>4项已逾期（8月9日截止）</strong>：整体方案输出、预算申请、账号基础搭建、营业执照办理 — 全部处于待启动状态。<br>
+    🟡 <strong>6项将在7天内到期</strong>：其中4项（门店手机配置、手机卡办理、蓝V认证及本地推、店铺基础搭建）仅剩 <strong>2天</strong>。<br>
+    ⚡ <strong>项目统筹组</strong>为全局瓶颈：9项任务中3项已逾期 + 3项7天内到期，占比 67%。<br>
+    💰 总预算估算：<strong>¥57,690</strong>（不变）。
+  </p>
+</div>
+
+<!-- 🔴 逾期任务 -->
+<div class="section">
+  <div class="section-title">
+    <span class="icon">🔴</span> 已逾期任务
+    <span class="count red">4项</span>
+  </div>
+  <ul class="task-list">
+    <li class="task-item overdue">
+      <span class="badge red">逾期1天</span>
+      <div class="info">
+        <div class="title">整体方案输出</div>
+        <div class="meta">项目统筹 · AC总 · 截止 8月9日</div>
+      </div>
+      <div class="due urgent">方案定稿</div>
+    </li>
+    <li class="task-item overdue">
+      <span class="badge red">逾期1天</span>
+      <div class="info">
+        <div class="title">预算申请</div>
+        <div class="meta">项目统筹 · AC总、陈总 · 截止 8月9日</div>
+      </div>
+      <div class="due urgent">预算审批完成</div>
+    </li>
+    <li class="task-item overdue">
+      <span class="badge red">逾期1天</span>
+      <div class="info">
+        <div class="title">账号基础搭建</div>
+        <div class="meta">小红书运营组 · 丽莎 · 截止 8月9日</div>
+      </div>
+      <div class="due urgent">蓝V认证+主页装修</div>
+    </li>
+    <li class="task-item overdue">
+      <span class="badge red">逾期1天</span>
+      <div class="info">
+        <div class="title">营业执照办理</div>
+        <div class="meta">项目统筹 · 陈总 · 截止 8月9日</div>
+      </div>
+      <div class="due urgent">证照齐全</div>
+    </li>
+  </ul>
+</div>
+
+<!-- 🟡 7天内到期任务 -->
+<div class="section">
+  <div class="section-title">
+    <span class="icon">🟡</span> 未来7天内到期
+    <span class="count yellow">6项</span>
+  </div>
+  <ul class="task-list">
+    <li class="task-item warning">
+      <span class="badge yellow">剩2天</span>
+      <div class="info">
+        <div class="title">门店手机配置</div>
+        <div class="meta">项目统筹 · 宇杰 · 截止 8月12日</div>
+      </div>
+      <div class="due warn">⏰ 8月12日</div>
+    </li>
+    <li class="task-item warning">
+      <span class="badge yellow">剩2天</span>
+      <div class="info">
+        <div class="title">门店手机卡办理</div>
+        <div class="meta">项目统筹 · 宇杰 · 截止 8月12日</div>
+      </div>
+      <div class="due warn">⏰ 8月12日</div>
+    </li>
+    <li class="task-item warning">
+      <span class="badge yellow">剩2天</span>
+      <div class="info">
+        <div class="title">蓝V认证及本地推</div>
+        <div class="meta">抖音及视频号组 · 鑫璇、微微 · 截止 8月12日</div>
+      </div>
+      <div class="due warn">⏰ 8月12日</div>
+    </li>
+    <li class="task-item warning">
+      <span class="badge yellow">剩2天</span>
+      <div class="info">
+        <div class="title">店铺基础搭建</div>
+        <div class="meta">点评与地图组 · 钰宜 · 截止 8月12日</div>
+      </div>
+      <div class="due warn">⏰ 8月12日</div>
+    </li>
+    <li class="task-item warning">
+      <span class="badge yellow">剩4天</span>
+      <div class="info">
+        <div class="title">宣传图文定稿</div>
+        <div class="meta">项目统筹 · 丽莎、林可欣 · 截止 8月14日</div>
+      </div>
+      <div class="due warn">5个子任务全部待启动</div>
+    </li>
+    <li class="task-item warning">
+      <span class="badge yellow">剩4天</span>
+      <div class="info">
+        <div class="title">门店蓝V及内容</div>
+        <div class="meta">点评与地图组 · 区域经理 · 截止 8月14日</div>
+      </div>
+      <div class="due warn">⏰ 8月14日</div>
+    </li>
+  </ul>
+</div>
+
+<!-- 各组完成情况 -->
+<div class="section">
+  <div class="section-title">
+    <span class="icon">📊</span> 各工作组进度
+  </div>
+  <div class="group-grid">
+    <div class="group-card">
+      <div class="gname">🔴 项目统筹</div>
+      <div class="gbar"><div class="done" style="width:0%"></div><div class="left" style="width:100%"></div></div>
+      <div class="gstats">
+        9项任务 · <span class="red-dot">3逾期</span> · <span class="yellow-dot">3预警</span>
+      </div>
+    </div>
+    <div class="group-card">
+      <div class="gname">🟡 小红书运营组</div>
+      <div class="gbar"><div class="done" style="width:0%"></div><div class="left" style="width:100%"></div></div>
+      <div class="gstats">
+        6项任务 · <span class="red-dot">1逾期</span> · <span>0预警</span>
+      </div>
+    </div>
+    <div class="group-card">
+      <div class="gname">🟡 抖音及视频号组</div>
+      <div class="gbar"><div class="done" style="width:0%"></div><div class="left" style="width:100%"></div></div>
+      <div class="gstats">
+        6项任务 · <span>0逾期</span> · <span class="yellow-dot">1预警</span>
+      </div>
+    </div>
+    <div class="group-card">
+      <div class="gname">🟡 点评与地图组</div>
+      <div class="gbar"><div class="done" style="width:0%"></div><div class="left" style="width:100%"></div></div>
+      <div class="gstats">
+        4项任务 · <span>0逾期</span> · <span class="yellow-dot">2预警</span>
+      </div>
+    </div>
+    <div class="group-card">
+      <div class="gname">⏳ 线下活动及私域组</div>
+      <div class="gbar"><div class="done" style="width:0%"></div><div class="left" style="width:100%"></div></div>
+      <div class="gstats">4项任务 · 最早截止 8月27日</div>
+    </div>
+    <div class="group-card">
+      <div class="gname">⏳ 物料组</div>
+      <div class="gbar"><div class="done" style="width:0%"></div><div class="left" style="width:100%"></div></div>
+      <div class="gstats">3项任务 · 最早截止 8月25日</div>
+    </div>
+    <div class="group-card">
+      <div class="gname">⏳ 复盘</div>
+      <div class="gbar"><div class="done" style="width:0%"></div><div class="left" style="width:100%"></div></div>
+      <div class="gstats">2项任务 · 最早截止 9月6日</div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  杭州2店开业项目进度追踪 · 每日 09:00 自动更新 · 数据来源 xiamen-store.onrender.com
+</div>
+
+</body>
+</html>

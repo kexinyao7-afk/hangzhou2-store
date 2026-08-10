@@ -1,17 +1,17 @@
 {
-  "last_updated_by": "阿厦",
-  "last_updated_at": "2026-08-08T08:54:18.365Z",
-  "last_save_version": 2,
+  "last_updated_by": "",
+  "last_updated_at": "",
+  "last_save_version": 0,
   "tasks": [
     {
       "id": 1,
       "group_name": "项目统筹",
       "platform": "全项目",
       "title": "整体方案输出",
-      "action": "确认杭州2店开业基础方案、可选宣传项目及时间表",
-      "due_date": "8月22日",
+      "action": "确认杭州开业基础方案、可选宣传项目及时间表",
+      "due_date": "8月15日",
       "owner": "AC总",
-      "collaborators": "陈总、余兰、宇杰、七七、曼芸、鑫璇、微微、区域经理、林可欣",
+      "collaborators": "陈总、余兰、宇杰、七七、丽莎、鑫璇、微微、区域经理、林可欣",
       "estimated_cost": 0,
       "actual_cost": null,
       "status": "pending",
@@ -21,7 +21,7 @@
       "updated_by": "",
       "updated_at": "",
       "sub_items": null,
-      "planned_date": "2026-08-21",
+      "planned_date": "2026-08-15",
       "completed_at": ""
     },
     {
@@ -30,7 +30,7 @@
       "platform": "全项目",
       "title": "预算申请",
       "action": "提交基础预算；待询价项目单独补充审批",
-      "due_date": "8月22日",
+      "due_date": "8月15日",
       "owner": "AC总、陈总",
       "collaborators": "余兰",
       "estimated_cost": 0,
@@ -42,7 +42,7 @@
       "updated_by": "",
       "updated_at": "",
       "sub_items": null,
-      "planned_date": "2026-08-21",
+      "planned_date": "2026-08-15",
       "completed_at": ""
     },
     {
@@ -51,8 +51,8 @@
       "platform": "全平台",
       "title": "宣传图文定稿",
       "action": "统一门店名称、地址、电话、活动和预约口径",
-      "due_date": "8月25日",
-      "owner": "曼芸、林可欣",
+      "due_date": "8月18日",
+      "owner": "丽莎、林可欣",
       "collaborators": "余兰、七七",
       "estimated_cost": 0,
       "actual_cost": null,
@@ -62,8 +62,8 @@
       "note": "",
       "updated_by": "",
       "updated_at": "",
-      "sub_items": "[{\"id\":1,\"title\":\"预热城市海报-曼芸\",\"completed\":0},{\"id\":2,\"title\":\"预热环境海报-曼芸\",\"completed\":0},{\"id\":3,\"title\":\"公众号推文-曼芸\",\"completed\":0},{\"id\":4,\"title\":\"开业活动海报-林可欣\",\"completed\":0},{\"id\":5,\"title\":\"KOC打卡活动海报-林可欣\",\"completed\":0}]",
-      "planned_date": "2026-08-26",
+      "sub_items": "[{\"id\":1,\"title\":\"预热城市海报-丽莎\",\"completed\":1},{\"id\":2,\"title\":\"预热环境海报-丽莎\",\"completed\":1},{\"id\":3,\"title\":\"公众号推文-丽莎\",\"completed\":0},{\"id\":4,\"title\":\"开业活动海报-林可欣\",\"completed\":0},{\"id\":5,\"title\":\"KOC打卡活动海报-林可欣\",\"completed\":0}]",
+      "planned_date": "2026-08-20",
       "completed_at": ""
     },
     {
@@ -72,7 +72,7 @@
       "platform": "全项目",
       "title": "活动落地执行",
       "action": "跟进平台、内容、物料和开业现场",
-      "due_date": "8月22日—9月19日",
+      "due_date": "8月15日—9月12日",
       "owner": "余兰、七七、林可欣",
       "collaborators": "AC总、陈总、宇杰、区域经理",
       "estimated_cost": 0,
@@ -84,7 +84,7 @@
       "updated_by": "",
       "updated_at": "",
       "sub_items": null,
-      "planned_date": "2026-09-06",
+      "planned_date": "2026-08-31",
       "completed_at": ""
     },
     {
@@ -92,8 +92,8 @@
       "group_name": "小红书运营组",
       "platform": "小红书达人",
       "title": "基础达人矩阵",
-      "action": "约50位素人博主，内容包含杭州2店新店、服务和开业活动",
-      "due_date": "9月2日—9月17日",
+      "action": "约50位素人博主，内容包含杭州新店、服务和开业活动",
+      "due_date": "8月26日—9月10日",
       "owner": "灵榕",
       "collaborators": "余兰、七七",
       "estimated_cost": 15000,
@@ -105,7 +105,7 @@
       "updated_by": "",
       "updated_at": "",
       "sub_items": null,
-      "planned_date": "2026-09-16",
+      "planned_date": "2026-09-10",
       "completed_at": ""
     },
     {
@@ -114,8 +114,8 @@
       "platform": "小红书店号",
       "title": "账号基础搭建",
       "action": "蓝V认证、私信设置、绑定门店地址、主页装修和预约入口",
-      "due_date": "8月22日",
-      "owner": "曼芸",
+      "due_date": "8月15日",
+      "owner": "丽莎",
       "collaborators": "余兰、七七",
       "estimated_cost": 600,
       "actual_cost": null,
@@ -126,7 +126,7 @@
       "updated_by": "",
       "updated_at": "",
       "sub_items": null,
-      "planned_date": "2026-08-21",
+      "planned_date": "2026-08-15",
       "completed_at": ""
     },
     {
@@ -135,8 +135,8 @@
       "platform": "小红书店号",
       "title": "基础内容发布",
       "action": "1条预热、1条环境、1条活动预热、1条开业活动、4条产品、1条路线、1条服务+产品硬广置顶，约10条",
-      "due_date": "8月28日—9月12日",
-      "owner": "曼芸",
+      "due_date": "8月21日—9月5日",
+      "owner": "丽莎",
       "collaborators": "余兰、七七",
       "estimated_cost": 0,
       "actual_cost": null,
@@ -147,7 +147,7 @@
       "updated_by": "",
       "updated_at": "",
       "sub_items": "[{\"id\":1,\"title\":\"预热（1条）\",\"completed\":0},{\"id\":2,\"title\":\"环境（1条）\",\"completed\":0},{\"id\":3,\"title\":\"产品 1/4\",\"completed\":0},{\"id\":4,\"title\":\"产品 2/4\",\"completed\":0},{\"id\":5,\"title\":\"产品 3/4\",\"completed\":0},{\"id\":6,\"title\":\"产品 4/4\",\"completed\":0},{\"id\":7,\"title\":\"活动预热（1条）\",\"completed\":0},{\"id\":8,\"title\":\"开业活动（1条）\",\"completed\":0},{\"id\":9,\"title\":\"koc打卡活动（林可欣安排制作）\",\"completed\":0},{\"id\":10,\"title\":\"路线（1条·视频/视频组制作·门店发布）\",\"completed\":0},{\"id\":11,\"title\":\"服务+产品硬广置顶（1条）\",\"completed\":0}]",
-      "planned_date": "2026-09-10",
+      "planned_date": "2026-09-04",
       "completed_at": ""
     },
     {
@@ -156,8 +156,8 @@
       "platform": "小红书店号",
       "title": "聚光投放",
       "action": "优先投放收藏、咨询表现较好的产品笔记",
-      "due_date": "9月8日起",
-      "owner": "曼芸",
+      "due_date": "9月1日起",
+      "owner": "丽莎",
       "collaborators": "余兰、七七",
       "estimated_cost": 15000,
       "actual_cost": null,
@@ -168,7 +168,7 @@
       "updated_by": "",
       "updated_at": "",
       "sub_items": "[{\"id\":1,\"title\":\"平台基础建设（名片、快捷回复等）\",\"completed\":0},{\"id\":2,\"title\":\"提前5天投放收藏、咨询表现较好的产品笔记\",\"completed\":0}]",
-      "planned_date": "2026-09-06",
+      "planned_date": "2026-08-31",
       "completed_at": ""
     },
     {
@@ -176,10 +176,10 @@
       "group_name": "小红书运营组",
       "platform": "小红书总号",
       "title": "总号内容与信息更新",
-      "action": "发布1条预热和1条正式开业内容；后台增加杭州2店店信息",
-      "due_date": "9月2日—9月12日",
+      "action": "发布1条预热和1条正式开业内容；后台增加杭州2店信息",
+      "due_date": "8月26日—9月5日",
       "owner": "七七",
-      "collaborators": "余兰、曼芸",
+      "collaborators": "余兰、丽莎",
       "estimated_cost": 0,
       "actual_cost": null,
       "status": "pending",
@@ -189,7 +189,7 @@
       "updated_by": "",
       "updated_at": "",
       "sub_items": null,
-      "planned_date": "2026-09-06",
+      "planned_date": "2026-08-31",
       "completed_at": ""
     },
     {
@@ -210,7 +210,7 @@
       "updated_by": "",
       "updated_at": "",
       "sub_items": null,
-      "planned_date": "2026-09-11",
+      "planned_date": "2026-09-05",
       "completed_at": ""
     },
     {
@@ -219,7 +219,7 @@
       "platform": "抖音店号",
       "title": "基础视频发布",
       "action": "门店装修预热系列、服务介绍1条、路线1条，约3条",
-      "due_date": "8月28日—9月12日",
+      "due_date": "8月21日—9月5日",
       "owner": "鑫璇、微微",
       "collaborators": "余兰、宇杰",
       "estimated_cost": 0,
@@ -231,7 +231,7 @@
       "updated_by": "",
       "updated_at": "",
       "sub_items": "[{\"id\":1,\"title\":\"门店装修阶段预热系列\",\"completed\":0},{\"id\":2,\"title\":\"服务介绍（1条）\",\"completed\":0},{\"id\":3,\"title\":\"路线（1条）\",\"completed\":0}]",
-      "planned_date": "2026-09-08",
+      "planned_date": "2026-09-02",
       "completed_at": ""
     },
     {
@@ -240,7 +240,7 @@
       "platform": "抖音店号",
       "title": "门店装修阶段预热",
       "action": "门店装修阶段预热系列（精神股东）",
-      "due_date": "8月28日起",
+      "due_date": "8月21日起",
       "owner": "鑫璇、微微",
       "collaborators": "余兰、宇杰",
       "estimated_cost": 0,
@@ -252,7 +252,7 @@
       "updated_by": "",
       "updated_at": "",
       "sub_items": null,
-      "planned_date": "2026-09-10",
+      "planned_date": "2026-09-04",
       "completed_at": ""
     },
     {
@@ -261,7 +261,7 @@
       "platform": "抖音店号",
       "title": "蓝V认证及本地推",
       "action": "完成认证并启动基础本地推",
-      "due_date": "9月8日起",
+      "due_date": "9月1日起",
       "owner": "鑫璇、微微",
       "collaborators": "余兰、宇杰",
       "estimated_cost": 3500,
@@ -273,7 +273,7 @@
       "updated_by": "",
       "updated_at": "",
       "sub_items": null,
-      "planned_date": "2026-08-24",
+      "planned_date": "2026-08-18",
       "completed_at": ""
     },
     {
@@ -282,7 +282,7 @@
       "platform": "抖音来客",
       "title": "团购与核销配置",
       "action": "认领、团购、子账号、核销和数据追踪",
-      "due_date": "9月7日",
+      "due_date": "8月31日",
       "owner": "鑫璇、微微",
       "collaborators": "余兰、宇杰",
       "estimated_cost": 0,
@@ -294,7 +294,7 @@
       "updated_by": "",
       "updated_at": "",
       "sub_items": null,
-      "planned_date": "2026-09-01",
+      "planned_date": "2026-08-26",
       "completed_at": ""
     },
     {
@@ -303,7 +303,7 @@
       "platform": "视频号店号",
       "title": "视频号内容",
       "action": "同步抖音内容",
-      "due_date": "8月29日—9月19日",
+      "due_date": "8月22日—9月12日",
       "owner": "鑫璇、微微",
       "collaborators": "余兰、宇杰",
       "estimated_cost": 0,
@@ -315,7 +315,7 @@
       "updated_by": "",
       "updated_at": "",
       "sub_items": null,
-      "planned_date": "2026-09-01",
+      "planned_date": "2026-08-26",
       "completed_at": ""
     },
     {
@@ -323,8 +323,8 @@
       "group_name": "抖音及视频号组",
       "platform": "视频号店号",
       "title": "总号同步",
-      "action": "同步预热及正式开业重点内容；增加杭州2店店信息",
-      "due_date": "9月2日—9月12日",
+      "action": "同步预热及正式开业重点内容；增加杭州2店信息",
+      "due_date": "8月26日—9月5日",
       "owner": "鑫璇、微微",
       "collaborators": "余兰、宇杰",
       "estimated_cost": 0,
@@ -336,7 +336,7 @@
       "updated_by": "",
       "updated_at": "",
       "sub_items": null,
-      "planned_date": "2026-09-08",
+      "planned_date": "2026-09-02",
       "completed_at": ""
     },
     {
@@ -345,7 +345,7 @@
       "platform": "大众点评/美团",
       "title": "店铺基础搭建",
       "action": "认领、装修、团购、私信、问答及门店子账号",
-      "due_date": "9月7日",
+      "due_date": "8月31日",
       "owner": "钰宜",
       "collaborators": "余兰、区域经理",
       "estimated_cost": 0,
@@ -357,7 +357,7 @@
       "updated_by": "",
       "updated_at": "",
       "sub_items": null,
-      "planned_date": "2026-08-24",
+      "planned_date": "2026-08-18",
       "completed_at": ""
     },
     {
@@ -366,7 +366,7 @@
       "platform": "大众点评/美团",
       "title": "付费推广",
       "action": "评分达到投放条件后启动搜索推广",
-      "due_date": "9月13日起",
+      "due_date": "9月6日起",
       "owner": "余兰",
       "collaborators": "区域经理、钰宜",
       "estimated_cost": 12000,
@@ -378,7 +378,7 @@
       "updated_by": "",
       "updated_at": "",
       "sub_items": null,
-      "planned_date": "2026-09-04",
+      "planned_date": "2026-08-29",
       "completed_at": ""
     },
     {
@@ -387,7 +387,7 @@
       "platform": "大众点评/美团",
       "title": "星级维护",
       "action": "开业30天内积累真实评价并持续回复",
-      "due_date": "9月13日—10月12日",
+      "due_date": "9月6日—10月5日",
       "owner": "区域经理",
       "collaborators": "余兰",
       "estimated_cost": 0,
@@ -399,7 +399,7 @@
       "updated_by": "",
       "updated_at": "",
       "sub_items": null,
-      "planned_date": "2026-09-06",
+      "planned_date": "2026-09-20",
       "completed_at": ""
     },
     {
@@ -408,7 +408,7 @@
       "platform": "大众点评/美团",
       "title": "门店蓝V及内容",
       "action": "同步门店环境、服务、套餐和路线内容",
-      "due_date": "9月7日",
+      "due_date": "8月31日",
       "owner": "区域经理",
       "collaborators": "余兰、钰宜",
       "estimated_cost": 0,
@@ -420,7 +420,7 @@
       "updated_by": "",
       "updated_at": "",
       "sub_items": null,
-      "planned_date": "2026-08-26",
+      "planned_date": "2026-09-10",
       "completed_at": ""
     },
     {
@@ -429,7 +429,7 @@
       "platform": "线下活动",
       "title": "基础开业活动",
       "action": "门店氛围、简单接待、预约核销和现场执行",
-      "due_date": "9月12日",
+      "due_date": "9月5日",
       "owner": "林可欣",
       "collaborators": "陈总、余兰、宇杰",
       "estimated_cost": 5000,
@@ -441,7 +441,7 @@
       "updated_by": "",
       "updated_at": "",
       "sub_items": null,
-      "planned_date": "2026-09-10",
+      "planned_date": "2026-09-04",
       "completed_at": ""
     },
     {
@@ -449,20 +449,20 @@
       "group_name": "线下活动及私域组",
       "platform": "线下活动",
       "title": "开业拍摄",
-      "action": "外部摄影团队：视频和图片；现场实时出片并交付精修及原素材",
-      "due_date": "9月12日",
-      "owner": "待定（外部摄影）",
-      "collaborators": "林可欣、七七",
-      "estimated_cost": 3000,
+      "action": "视频和图片；现场实时出片并交付精修及原素材",
+      "due_date": "9月5日",
+      "owner": "文菁",
+      "collaborators": "七七",
+      "estimated_cost": 1000,
       "actual_cost": null,
       "status": "pending",
       "completed": 0,
       "acceptance": "完整开业素材",
-      "note": "需额外寻找杭州本地摄影团队",
-      "updated_by": "阿厦",
-      "updated_at": "2026-08-08T08:53:53.467Z",
+      "note": "",
+      "updated_by": "",
+      "updated_at": "",
       "sub_items": null,
-      "planned_date": "2026-09-11",
+      "planned_date": "2026-09-05",
       "completed_at": ""
     },
     {
@@ -471,7 +471,7 @@
       "platform": "线下活动",
       "title": "基础伴手礼",
       "action": "擦镜纸、眼镜收纳盒、清洗机等（仓库库存）",
-      "due_date": "9月11日",
+      "due_date": "9月4日",
       "owner": "余兰、林可欣",
       "collaborators": "陈总、宇杰、区域经理",
       "estimated_cost": 1500,
@@ -483,7 +483,7 @@
       "updated_by": "",
       "updated_at": "",
       "sub_items": null,
-      "planned_date": "2026-09-08",
+      "planned_date": "2026-09-02",
       "completed_at": ""
     },
     {
@@ -492,8 +492,8 @@
       "platform": "微信公众号",
       "title": "开业推文",
       "action": "预热推文1篇、正式开业推文1篇，包含路线和预约入口",
-      "due_date": "9月2日—9月12日",
-      "owner": "曼芸",
+      "due_date": "8月26日—9月5日",
+      "owner": "丽莎",
       "collaborators": "余兰、七七",
       "estimated_cost": 0,
       "actual_cost": null,
@@ -504,7 +504,7 @@
       "updated_by": "",
       "updated_at": "",
       "sub_items": "[{\"id\":1,\"title\":\"全国门店微信公众号转发\",\"completed\":0},{\"id\":2,\"title\":\"杭州推文1篇\",\"completed\":0}]",
-      "planned_date": "2026-09-09",
+      "planned_date": "2026-09-03",
       "completed_at": ""
     },
     {
@@ -513,7 +513,7 @@
       "platform": "线下物料",
       "title": "电梯口指引牌",
       "action": "提供尺寸、设计定稿、制作并在门店展出",
-      "due_date": "9月9日",
+      "due_date": "9月2日",
       "owner": "林可欣",
       "collaborators": "宇杰、区域经理",
       "estimated_cost": 30,
@@ -525,7 +525,7 @@
       "updated_by": "",
       "updated_at": "",
       "sub_items": "[{\"id\":1,\"title\":\"设计定稿\",\"completed\":0},{\"id\":2,\"title\":\"设计印刷\",\"completed\":0},{\"id\":3,\"title\":\"门店展出\",\"completed\":0}]",
-      "planned_date": "2026-09-06",
+      "planned_date": "2026-08-31",
       "completed_at": ""
     },
     {
@@ -534,7 +534,7 @@
       "platform": "线下物料",
       "title": "开业活动水牌",
       "action": "展示活动内容、预约方式及注意事项",
-      "due_date": "9月9日",
+      "due_date": "9月2日",
       "owner": "林可欣",
       "collaborators": "宇杰、区域经理",
       "estimated_cost": 30,
@@ -546,7 +546,7 @@
       "updated_by": "",
       "updated_at": "",
       "sub_items": null,
-      "planned_date": "2026-09-06",
+      "planned_date": "2026-08-31",
       "completed_at": ""
     },
     {
@@ -555,7 +555,7 @@
       "platform": "线下物料",
       "title": "KOC打卡水牌",
       "action": "展示打卡规则、内容要求和赠礼说明",
-      "due_date": "9月9日",
+      "due_date": "9月2日",
       "owner": "林可欣",
       "collaborators": "宇杰、区域经理",
       "estimated_cost": 30,
@@ -567,7 +567,7 @@
       "updated_by": "",
       "updated_at": "",
       "sub_items": null,
-      "planned_date": "2026-09-06",
+      "planned_date": "2026-08-31",
       "completed_at": ""
     },
     {
@@ -576,9 +576,9 @@
       "platform": "全平台",
       "title": "开业7天复盘",
       "action": "汇总费用、曝光、咨询、预约、到店和成交",
-      "due_date": "9月19日",
+      "due_date": "9月12日",
       "owner": "陈总、余兰",
-      "collaborators": "宇杰、七七、曼芸、鑫璇、微微、区域经理、灵榕、钰宜、林可欣",
+      "collaborators": "宇杰、七七、丽莎、鑫璇、微微、区域经理、灵榕、钰宜、林可欣",
       "estimated_cost": 0,
       "actual_cost": null,
       "status": "pending",
@@ -588,7 +588,7 @@
       "updated_by": "",
       "updated_at": "",
       "sub_items": null,
-      "planned_date": "2026-09-18",
+      "planned_date": "2026-09-12",
       "completed_at": ""
     },
     {
@@ -597,9 +597,9 @@
       "platform": "全平台",
       "title": "开业30天复盘",
       "action": "判断继续、优化或停止的项目",
-      "due_date": "10月12日",
+      "due_date": "10月5日",
       "owner": "陈总、余兰",
-      "collaborators": "宇杰、七七、曼芸、鑫璇、微微、区域经理、灵榕、钰宜、林可欣",
+      "collaborators": "宇杰、七七、丽莎、鑫璇、微微、区域经理、灵榕、钰宜、林可欣",
       "estimated_cost": 0,
       "actual_cost": null,
       "status": "pending",
@@ -609,7 +609,7 @@
       "updated_by": "",
       "updated_at": "",
       "sub_items": null,
-      "planned_date": "2026-10-11",
+      "planned_date": "2026-10-05",
       "completed_at": ""
     },
     {
@@ -618,7 +618,7 @@
       "platform": "全项目",
       "title": "装修进度跟进",
       "action": "跟进门店装修施工进度，确保硬装按时交付",
-      "due_date": "8月22日—9月7日",
+      "due_date": "8月15日—8月31日",
       "owner": "陈总",
       "collaborators": "余兰",
       "estimated_cost": 0,
@@ -630,7 +630,7 @@
       "updated_by": "",
       "updated_at": "",
       "sub_items": null,
-      "planned_date": "2026-09-10",
+      "planned_date": "2026-09-04",
       "completed_at": ""
     },
     {
@@ -638,8 +638,8 @@
       "group_name": "项目统筹",
       "platform": "全项目",
       "title": "营业执照办理",
-      "action": "办理杭州2店门店营业执照、税务登记及相关经营资质",
-      "due_date": "8月25日",
+      "action": "办理杭州门店营业执照、税务登记及相关经营资质",
+      "due_date": "8月18日",
       "owner": "陈总",
       "collaborators": "余兰",
       "estimated_cost": 0,
@@ -651,8 +651,8 @@
       "updated_by": "",
       "updated_at": "",
       "sub_items": null,
-      "planned_date": "2026-08-21",
-      "completed_at": "2026-07-29"
+      "planned_date": "2026-08-15",
+      "completed_at": ""
     },
     {
       "id": 38,
@@ -660,7 +660,7 @@
       "platform": "全项目",
       "title": "门店手机配置",
       "action": "配置门店专用手机，安装微信、小红书、抖音、点评等必要应用",
-      "due_date": "9月2日",
+      "due_date": "8月26日",
       "owner": "宇杰",
       "collaborators": "陈总、余兰、区域经理",
       "estimated_cost": null,
@@ -672,7 +672,7 @@
       "updated_by": "",
       "updated_at": "",
       "sub_items": null,
-      "planned_date": "2026-08-24",
+      "planned_date": "2026-08-18",
       "completed_at": ""
     },
     {
@@ -680,8 +680,8 @@
       "group_name": "项目统筹",
       "platform": "全项目",
       "title": "门店手机卡办理",
-      "action": "办理杭州2店本地手机号，用于门店对外联系及各平台账号注册绑定",
-      "due_date": "9月2日",
+      "action": "办理杭州本地手机号，用于门店对外联系及各平台账号注册绑定",
+      "due_date": "8月26日",
       "owner": "宇杰",
       "collaborators": "陈总、余兰、区域经理",
       "estimated_cost": null,
@@ -693,7 +693,7 @@
       "updated_by": "",
       "updated_at": "",
       "sub_items": null,
-      "planned_date": "2026-08-24",
+      "planned_date": "2026-08-18",
       "completed_at": ""
     },
     {
@@ -702,7 +702,7 @@
       "platform": "全项目",
       "title": "开业活动方案",
       "action": "确认开业活动主题、优惠政策、活动形式、预约流程及现场动线",
-      "due_date": "8月25日",
+      "due_date": "8月18日",
       "owner": "AC总、余兰、陈总",
       "collaborators": "七七、林可欣",
       "estimated_cost": 0,
@@ -714,7 +714,49 @@
       "updated_by": "",
       "updated_at": "",
       "sub_items": null,
-      "planned_date": "2026-09-06",
+      "planned_date": "2026-08-31",
+      "completed_at": ""
+    },
+    {
+      "id": 41,
+      "group_name": "项目统筹",
+      "platform": "线下活动",
+      "title": "方案一：保时捷车友会活动",
+      "action": "与保时捷车友会合作的开业联动活动方案（候选）",
+      "due_date": "待定",
+      "owner": "待定",
+      "collaborators": "",
+      "estimated_cost": null,
+      "actual_cost": null,
+      "status": "pending",
+      "completed": 0,
+      "acceptance": "方案确认后执行",
+      "note": "",
+      "updated_by": "",
+      "updated_at": "",
+      "sub_items": null,
+      "planned_date": "",
+      "completed_at": ""
+    },
+    {
+      "id": 42,
+      "group_name": "项目统筹",
+      "platform": "线下活动",
+      "title": "方案二：色彩测试沙龙",
+      "action": "色彩测试主题沙龙活动方案（候选）",
+      "due_date": "待定",
+      "owner": "待定",
+      "collaborators": "",
+      "estimated_cost": null,
+      "actual_cost": null,
+      "status": "pending",
+      "completed": 0,
+      "acceptance": "方案确认后执行",
+      "note": "",
+      "updated_by": "",
+      "updated_at": "",
+      "sub_items": null,
+      "planned_date": "",
       "completed_at": ""
     }
   ],
@@ -731,9 +773,9 @@
       "owner": "灵榕",
       "selected": 0,
       "actual_cost": null,
-      "actual_result": null,
+      "actual_result": "",
       "note": "",
-      "updated_at": ""
+      "updated_at": "2026-07-24T01:34:32.203Z"
     },
     {
       "id": 2,
@@ -747,7 +789,7 @@
       "owner": "鑫璇",
       "selected": 0,
       "actual_cost": null,
-      "actual_result": null,
+      "actual_result": "",
       "note": "",
       "updated_at": ""
     },
@@ -760,12 +802,12 @@
       "maximum_cost": 50000,
       "content": "对高收藏、高咨询笔记追加投放",
       "expected_effect": "增加曝光、咨询和预约",
-      "owner": "曼芸",
+      "owner": "丽莎",
       "selected": 0,
       "actual_cost": null,
-      "actual_result": null,
+      "actual_result": "",
       "note": "",
-      "updated_at": ""
+      "updated_at": "2026-07-24T01:34:32.213Z"
     },
     {
       "id": 4,
@@ -779,7 +821,7 @@
       "owner": "鑫璇",
       "selected": 0,
       "actual_cost": null,
-      "actual_result": null,
+      "actual_result": "",
       "note": "",
       "updated_at": ""
     },
@@ -795,7 +837,7 @@
       "owner": "鑫璇、微微",
       "selected": 0,
       "actual_cost": null,
-      "actual_result": null,
+      "actual_result": "",
       "note": "",
       "updated_at": ""
     },
@@ -811,7 +853,7 @@
       "owner": "林可欣",
       "selected": 0,
       "actual_cost": null,
-      "actual_result": null,
+      "actual_result": "",
       "note": "",
       "updated_at": ""
     },
@@ -827,7 +869,7 @@
       "owner": "七七",
       "selected": 0,
       "actual_cost": null,
-      "actual_result": null,
+      "actual_result": "",
       "note": "",
       "updated_at": ""
     },
@@ -843,7 +885,7 @@
       "owner": "林可欣",
       "selected": 0,
       "actual_cost": null,
-      "actual_result": null,
+      "actual_result": "",
       "note": "",
       "updated_at": ""
     },
@@ -859,7 +901,7 @@
       "owner": "余兰、林可欣",
       "selected": 0,
       "actual_cost": null,
-      "actual_result": null,
+      "actual_result": "",
       "note": "",
       "updated_at": ""
     },
@@ -875,7 +917,7 @@
       "owner": "余兰、区域经理",
       "selected": 0,
       "actual_cost": null,
-      "actual_result": null,
+      "actual_result": "",
       "note": "",
       "updated_at": ""
     },
@@ -891,7 +933,7 @@
       "owner": "余兰、区域经理",
       "selected": 0,
       "actual_cost": null,
-      "actual_result": null,
+      "actual_result": "",
       "note": "",
       "updated_at": ""
     },
@@ -907,7 +949,7 @@
       "owner": "林可欣",
       "selected": 0,
       "actual_cost": null,
-      "actual_result": null,
+      "actual_result": "",
       "note": "",
       "updated_at": ""
     },
@@ -920,10 +962,10 @@
       "maximum_cost": 20000,
       "content": "招募10—30人试营业体验并产出反馈",
       "expected_effect": "增加口碑和预约",
-      "owner": "曼芸、区域经理",
+      "owner": "丽莎、区域经理",
       "selected": 0,
       "actual_cost": null,
-      "actual_result": null,
+      "actual_result": "",
       "note": "",
       "updated_at": ""
     },
@@ -936,10 +978,10 @@
       "maximum_cost": 45000,
       "content": "内容、达人、点评和顾客案例持续维护",
       "expected_effect": "维持曝光、口碑和预约",
-      "owner": "七七、曼芸、灵榕",
+      "owner": "七七、丽莎、灵榕",
       "selected": 0,
       "actual_cost": null,
-      "actual_result": null,
+      "actual_result": "",
       "note": "",
       "updated_at": ""
     },
@@ -955,7 +997,7 @@
       "owner": "林可欣",
       "selected": 0,
       "actual_cost": null,
-      "actual_result": null,
+      "actual_result": "",
       "note": "",
       "updated_at": ""
     }

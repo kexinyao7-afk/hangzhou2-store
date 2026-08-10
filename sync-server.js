@@ -5,9 +5,18 @@ const https = require('https');
 const app = express();
 app.use(express.json());
 
-const DB_FILE = path.join(__dirname, 'data', 'state.json');
+const DB_SEED = path.join(__dirname, 'data', 'state.json');
+const DB_RUNTIME = path.join(__dirname, 'data', 'runtime.json');
 const NOTIFY_FILE = path.join(__dirname, 'data', 'notifications.json');
 const WECOM_WEBHOOK = process.env.WECOM_WEBHOOK || '';
+
+// Use runtime.json for persistence (NOT state.json which gets overwritten on deploy)
+const DB_FILE = DB_RUNTIME;
+// On first boot, copy seed to runtime if no runtime exists
+if (!fs.existsSync(DB_RUNTIME) && fs.existsSync(DB_SEED)) {
+  fs.copyFileSync(DB_SEED, DB_RUNTIME);
+  console.log('📋 Copied seed data to runtime.json');
+}
 
 // Optional WeCom AI Bot (non-blocking)
 let bot = null;
