@@ -87,10 +87,10 @@ function seedDatabase() {
 
     // ===== 小红书运营组 =====
     { group_name: '小红书运营组', platform: '小红书达人', title: '基础达人矩阵', action: '约25位KOC/KOL，内容包含杭州新店、路线、服务和开业活动', due_date: '8月5日—8月20日', owner: '灵榕', collaborators: '七七、余兰', estimated_cost: 53000, acceptance: '内容上线并回收数据' },
-    { group_name: '小红书运营组', platform: '小红书店号', title: '账号基础搭建', action: '蓝V认证、私信设置、绑定门店地址、主页装修和预约入口', due_date: '8月7日', owner: '丽莎', collaborators: '七七、林可欣、余兰', estimated_cost: 600, acceptance: '店号可搜索和预约' },
-    { group_name: '小红书运营组', platform: '小红书店号', title: '基础内容发布', action: '1条预热、1条环境、1条活动预热、1条开业活动、4条产品、1条路线、1条服务+产品硬广置顶，约10条', due_date: '7月31日—8月15日', owner: '丽莎', collaborators: '七七、林可欣、余兰', estimated_cost: 0, acceptance: '完成基础内容发布' },
+    { group_name: '小红书运营组', platform: '小红书店号', title: '账号基础搭建', action: '蓝V认证、私信设置、绑定门店地址、主页装修和预约入口', due_date: '8月7日', owner: '曼芸', collaborators: '七七、林可欣、余兰', estimated_cost: 600, acceptance: '店号可搜索和预约' },
+    { group_name: '小红书运营组', platform: '小红书店号', title: '基础内容发布', action: '1条预热、1条环境、1条活动预热、1条开业活动、4条产品、1条路线、1条服务+产品硬广置顶，约10条', due_date: '7月31日—8月15日', owner: '曼芸', collaborators: '七七、林可欣、余兰', estimated_cost: 0, acceptance: '完成基础内容发布' },
 
-    { group_name: '小红书运营组', platform: '小红书店号', title: '聚光投放', action: '优先投放收藏、咨询表现较好的笔记', due_date: '8月11日起', owner: '丽莎', collaborators: '七七、余兰', estimated_cost: 15000, acceptance: '获得曝光、咨询和预约' },
+    { group_name: '小红书运营组', platform: '小红书店号', title: '聚光投放', action: '优先投放收藏、咨询表现较好的笔记', due_date: '8月11日起', owner: '曼芸', collaborators: '七七、余兰', estimated_cost: 15000, acceptance: '获得曝光、咨询和预约' },
     { group_name: '小红书运营组', platform: '小红书总号', title: '总号内容与信息更新', action: '发布1条预热和1条正式开业内容；后台增加杭州店信息', due_date: '8月5日—8月15日', owner: '七七', collaborators: '林可欣、余兰', estimated_cost: 0, acceptance: '总号完成新店露出' },
     { group_name: '小红书运营组', platform: '小红书/点评/抖音', title: 'KOC到店打卡', action: '到店发布内容及真实评价；赠礼成本按实际数量另计', due_date: '开业后启动', owner: '门店同事', collaborators: '灵榕、门店同事、七七、余兰', estimated_cost: 0, acceptance: '形成首批口碑' },
 
@@ -115,24 +115,24 @@ function seedDatabase() {
     { group_name: '线下活动及私域组', platform: '线下活动', title: '花艺装扮', action: '桌花、花篮及门店氛围布置', due_date: '8月14日', owner: '林可欣', collaborators: '店长、陈总', estimated_cost: 2000, acceptance: '花艺按时到场' },
     { group_name: '线下活动及私域组', platform: '线下活动', title: '开业拍摄', action: '视频和图片；现场实时出片并交付精修及原素材', due_date: '8月15日', owner: '林可欣', collaborators: '余兰、门店同事、七七', estimated_cost: 6000, acceptance: '完整开业素材' },
     { group_name: '线下活动及私域组', platform: '线下活动', title: '基础伴手礼', action: '按预约及重点客户名单准备基础礼赠', due_date: '8月14日', owner: '林可欣', collaborators: '店长、门店同事、陈总', estimated_cost: 3000, acceptance: '数量及名单核对' },
-    { group_name: '线下活动及私域组', platform: '微信公众号', title: '开业推文', action: '预热推文1篇、正式开业推文1篇，包含路线和预约入口', due_date: '8月5日—8月15日', owner: '丽莎', collaborators: '七七、余兰', estimated_cost: 0, acceptance: '完成2篇推文' },
+    { group_name: '线下活动及私域组', platform: '微信公众号', title: '开业推文', action: '预热推文1篇、正式开业推文1篇，包含路线和预约入口', due_date: '8月5日—8月15日', owner: '曼芸', collaborators: '七七、余兰', estimated_cost: 0, acceptance: '完成2篇推文' },
     { group_name: '线下活动及私域组', platform: '企微/朋友圈', title: '老客邀约', action: '老店同步回访目标客户；发布预热、活动、倒计时和开业回顾', due_date: '8月5日—8月22日', owner: '门店同事', collaborators: '林可欣、门店同事', estimated_cost: 0, acceptance: '获得有效预约' },
 
     // ===== 物料组 =====
     { group_name: '物料组', platform: '线下物料', title: '电梯口指引牌', action: '提供尺寸、设计定稿、制作并在门店展出', due_date: '8月12日', owner: '林可欣', collaborators: '店长、陈总', estimated_cost: 30, acceptance: '完成到店指引' },
     { group_name: '物料组', platform: '线下物料', title: '开业活动水牌', action: '展示活动内容、预约方式及注意事项', due_date: '8月12日', owner: '林可欣', collaborators: '店长、陈总', estimated_cost: 30, acceptance: '现场展示' },
     { group_name: '物料组', platform: '线下物料', title: 'KOC打卡水牌', action: '展示打卡规则、内容要求和赠礼说明', due_date: '8月12日', owner: '林可欣', collaborators: '店长、灵榕、陈总', estimated_cost: 30, acceptance: '现场展示' },
-    { group_name: '物料组', platform: '线上物料', title: '开业及路线海报', action: '制作杭州店各平台适配版本海报；全国门店转发开业公众号链接；杭州店小红书版本已纳入基础内容发布', due_date: '8月12日', owner: '林可欣', collaborators: '丽莎、七七、鑫璇、微微', estimated_cost: 0, acceptance: '全部版本定稿' },
+    { group_name: '物料组', platform: '线上物料', title: '开业及路线海报', action: '制作杭州店各平台适配版本海报；全国门店转发开业公众号链接；杭州店小红书版本已纳入基础内容发布', due_date: '8月12日', owner: '林可欣', collaborators: '曼芸、七七、鑫璇、微微', estimated_cost: 0, acceptance: '全部版本定稿' },
 
     // ===== 复盘 =====
-    { group_name: '复盘', platform: '全平台', title: '开业7天复盘', action: '汇总费用、曝光、咨询、预约、到店和成交', due_date: '8月22日', owner: '余兰', collaborators: '七七、灵榕、丽莎、鑫璇、微微、钰宜、林可欣', estimated_cost: 0, acceptance: '形成7天复盘' },
-    { group_name: '复盘', platform: '全平台', title: '开业30天复盘', action: '判断继续、优化或停止的项目', due_date: '9月14日', owner: '余兰', collaborators: '七七、灵榕、丽莎、鑫璇、微微、钰宜、林可欣', estimated_cost: 0, acceptance: '形成30天复盘' },
+    { group_name: '复盘', platform: '全平台', title: '开业7天复盘', action: '汇总费用、曝光、咨询、预约、到店和成交', due_date: '8月22日', owner: '余兰', collaborators: '七七、灵榕、曼芸、鑫璇、微微、钰宜、林可欣', estimated_cost: 0, acceptance: '形成7天复盘' },
+    { group_name: '复盘', platform: '全平台', title: '开业30天复盘', action: '判断继续、优化或停止的项目', due_date: '9月14日', owner: '余兰', collaborators: '七七、灵榕、曼芸、鑫璇、微微、钰宜、林可欣', estimated_cost: 0, acceptance: '形成30天复盘' },
   ];
 
   const optionalItems = [
     { type: '达人追加', title: '小红书达人补充10位', platform: '小红书', minimum_cost: 4000, maximum_cost: 8000, content: '前期数据较好时追加本地KOC', expected_effect: '增加约8万—20万曝光', owner: '灵榕' },
     { type: '内容升级', title: '专业短视频系列升级', platform: '抖音/视频号', minimum_cost: 12000, maximum_cost: 30000, content: '增加脚本、出镜、专业拍摄和剪辑', expected_effect: '增加约15万—35万曝光及咨询', owner: '鑫璇' },
-    { type: '追加投放', title: '小红书聚光追加', platform: '小红书', minimum_cost: 10000, maximum_cost: 50000, content: '对高收藏、高咨询笔记追加投放', expected_effect: '增加曝光、咨询和预约', owner: '丽莎' },
+    { type: '追加投放', title: '小红书聚光追加', platform: '小红书', minimum_cost: 10000, maximum_cost: 50000, content: '对高收藏、高咨询笔记追加投放', expected_effect: '增加曝光、咨询和预约', owner: '曼芸' },
     { type: '追加投放', title: '抖音本地推追加', platform: '抖音', minimum_cost: 10000, maximum_cost: 50000, content: '对高互动、高私信视频追加投放', expected_effect: '增加本地曝光、咨询和预约', owner: '鑫璇' },
     { type: '直播', title: '探店或开业直播', platform: '抖音/视频号', minimum_cost: 8000, maximum_cost: 25000, content: '探店直播、开业直播及直播预约权益', expected_effect: '增加观看、咨询和预约', owner: '鑫璇、微微' },
     { type: '楼宇媒体', title: '写字楼电梯广告', platform: '线下媒体', minimum_cost: 21000, maximum_cost: 35000, content: '按杭州写字楼点位、上刊周期和数量询价', expected_effect: '增强楼宇及周边人群认知', owner: '林可欣' },
@@ -142,8 +142,8 @@ function seedDatabase() {
     { type: '异业合作', title: '咖啡/牙科/医美/企业联名', platform: '异业/私域', minimum_cost: 8000, maximum_cost: 30000, content: '联合权益、客户邀约及活动内容', expected_effect: '增加预约和成交', owner: '店长、余兰' },
     { type: '企业获客', title: '写字楼企业客户专场', platform: '企微/线下', minimum_cost: 10000, maximum_cost: 30000, content: '企业验光、选镜或员工福利专场', expected_effect: '增加企业预约和成交', owner: '店长、余兰' },
     { type: '礼赠升级', title: '开业礼赠升级', platform: '线下/私域', minimum_cost: 8000, maximum_cost: 30000, content: '提升重点客户和转介绍礼赠', expected_effect: '提升到店、成交和转介绍', owner: '林可欣' },
-    { type: '体验招募', title: '试营业体验官', platform: '全平台', minimum_cost: 6000, maximum_cost: 20000, content: '招募10—30人试营业体验并产出反馈', expected_effect: '增加口碑和预约', owner: '丽莎、门店同事' },
-    { type: '持续传播', title: '开业后30天种草维护', platform: '全平台', minimum_cost: 15000, maximum_cost: 45000, content: '内容、达人、点评和顾客案例持续维护', expected_effect: '维持曝光、口碑和预约', owner: '七七、灵榕、丽莎' },
+    { type: '体验招募', title: '试营业体验官', platform: '全平台', minimum_cost: 6000, maximum_cost: 20000, content: '招募10—30人试营业体验并产出反馈', expected_effect: '增加口碑和预约', owner: '曼芸、门店同事' },
+    { type: '持续传播', title: '开业后30天种草维护', platform: '全平台', minimum_cost: 15000, maximum_cost: 45000, content: '内容、达人、点评和顾客案例持续维护', expected_effect: '维持曝光、口碑和预约', owner: '七七、灵榕、曼芸' },
   ];
 
   const seedAll = db.transaction(() => {
