@@ -1,7 +1,7 @@
 {
-  "last_updated_by": "系统同步（丽莎→曼芸）",
-  "last_updated_at": "2026-08-17T13:32:54.000Z",
-  "last_save_version": 12,
+  "last_updated_by": "系统同步（开业活动日期对齐9.19）",
+  "last_updated_at": "2026-08-17T14:34:47.000Z",
+  "last_save_version": 13,
   "tasks": [
     {
       "id": 1,
@@ -494,8 +494,8 @@
       "group_name": "线下活动及私域组",
       "platform": "线下活动",
       "title": "基础开业活动（待定）",
-      "action": "9.19 开业当天执行",
-      "due_date": "9月17日",
+      "action": "9.19 开业活动当天执行",
+      "due_date": "9月19日",
       "owner": "林可欣",
       "collaborators": "陈总、余兰、宇杰",
       "estimated_cost": 0,
